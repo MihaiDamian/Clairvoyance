@@ -35,6 +35,7 @@ class ClairvoyanceJSON:
         data_meshes = []
         for mesh in bpy.data.meshes:
             data_mesh = {}
+            data_mesh['name'] = mesh.name
             data_vertices = []
             for vertex in mesh.vertices:
                 data_vertices += list(vertex.co)
