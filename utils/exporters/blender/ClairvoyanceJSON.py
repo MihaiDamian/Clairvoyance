@@ -19,11 +19,16 @@ if "bpy" in locals():
 import json
 
 import bpy
+from bpy.props import BoolProperty
 from io_utils import ExportHelper
 
 
 class ClairvoyanceJSON:
     string = ""
+    prettyprint = False
+
+    def __init__(self, prettyprint):
+        self.prettyprint = prettyprint
     
     def create(self):
         data = {}
@@ -36,8 +41,11 @@ class ClairvoyanceJSON:
             data_mesh['vertices'] = data_vertices
             data_meshes.append(data_mesh)
         data['meshes'] = data_meshes
-        #self.string = json.dumps(data, separators=(',', ':'))
-        self.string = json.dumps(data, sort_keys=True, indent=4)
+        
+        if self.prettyprint:
+            self.string = json.dumps(data, sort_keys=True, indent=4)
+        else:
+            self.string = json.dumps(data, separators=(',', ':'))
 
 
 class ExportJSON(bpy.types.Operator, ExportHelper):
@@ -45,11 +53,15 @@ class ExportJSON(bpy.types.Operator, ExportHelper):
     bl_label = "Export Clairvoyance JSON"
 
     filename_ext = ".js"
+
+    prettyprint = BoolProperty(name="Prettyprint",
+                               description="Nicely indented JSON",
+                               default=False)
  
     def execute(self, context):
         filepath = self.filepath
         filepath = bpy.path.ensure_ext(filepath, self.filename_ext)
-        json = ClairvoyanceJSON()
+        json = ClairvoyanceJSON(self.prettyprint)
         json.create()
         content = json.string
         self.save_file(filepath, content)
