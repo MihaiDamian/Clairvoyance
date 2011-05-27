@@ -37,8 +37,9 @@ class ClairvoyanceJSON:
             data_mesh = {}
             data_mesh['name'] = mesh.name
             data_vertices = []
-            for vertex in mesh.vertices:
-                data_vertices += list(vertex.co)
+            for face in mesh.faces:
+                for vertex_id in face.vertices:
+                    data_vertices += list(mesh.vertices[vertex_id].co)
             data_mesh['vertices'] = data_vertices
             data_meshes.append(data_mesh)
         data['meshes'] = data_meshes
