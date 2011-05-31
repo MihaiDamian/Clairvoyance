@@ -1,4 +1,4 @@
-CLAIRVOYANCE.Controller = function(canvas, document, renderer) {
+CLAIRVOYANCE.Controller = function(canvas, document, scene) {
 	function degToRad(degrees) {
 		return degrees * Math.PI / 180;
 	};
@@ -32,7 +32,7 @@ CLAIRVOYANCE.Controller = function(canvas, document, renderer) {
 		var deltaY = newY - lastMouseY;
 		mat4.rotate(newRotationMatrix, degToRad(deltaY / 10), [1, 0, 0]);
 
-		renderer.rotate(newRotationMatrix);
+		scene.rotate(newRotationMatrix);
 
 		lastMouseX = newX
 		lastMouseY = newY;

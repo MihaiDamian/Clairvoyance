@@ -1,23 +1,13 @@
 var CLAIRVOYANCE = CLAIRVOYANCE || function(canvasID, sceneFilePath) {
-		function tick() {
-			requestAnimFrame(tick);
-			renderer.drawScene();
-		};
-		
-		function onSceneLoaded(data) {
-			renderer.onSceneLoaded(data);
-			tick();
-		};
-
 		var canvas = document.getElementById(canvasID);
-		var renderer = new CLAIRVOYANCE.WebglRenderer(canvas);
-		var controller = new CLAIRVOYANCE.Controller(canvas, document, renderer);
-		var scene = new CLAIRVOYANCE.Scene();
-		scene.load(sceneFilePath, onSceneLoaded);
+		var renderer = new CLAIRVOYANCE.Renderer(canvas);
+		var scene = new CLAIRVOYANCE.Scene(renderer);
+		scene.load(sceneFilePath);
+		var controller = new CLAIRVOYANCE.Controller(canvas, document, scene);
 };
 
 
-CLAIRVOYANCE.Controller = function(canvas, document, renderer) {
+CLAIRVOYANCE.Controller = function(canvas, document, scene) {
 	function degToRad(degrees) {
 		return degrees * Math.PI / 180;
 	};
@@ -51,7 +41,7 @@ CLAIRVOYANCE.Controller = function(canvas, document, renderer) {
 		var deltaY = newY - lastMouseY;
 		mat4.rotate(newRotationMatrix, degToRad(deltaY / 10), [1, 0, 0]);
 
-		renderer.rotate(newRotationMatrix);
+		scene.rotate(newRotationMatrix);
 
 		lastMouseX = newX
 		lastMouseY = newY;
@@ -62,23 +52,38 @@ CLAIRVOYANCE.Controller = function(canvas, document, renderer) {
 	document.onmousemove = handleMouseMove;
 };
 
-CLAIRVOYANCE.Scene = function(){
-	this.load = function(filePath, onSceneLoaded){
-		var request = new XMLHttpRequest();
-		request.open("GET", filePath);
-		request.onreadystatechange = function() {
-		  if (request.readyState == 4) {
-			onSceneLoaded(JSON.parse(request.responseText));
-		  }
-		}
-		request.send();
+CLAIRVOYANCE.Node = function(data, renderer, parent) {
+	var gl = renderer.gl();
+	
+	var mvMatrix = mat4.create();
+
+	var vertexPositionBuffer = gl.createBuffer();
+	
+	function setMatrixUniforms() {
+		var shaderProgram = renderer.shaderProgram();
+		gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
 	};
+	
+	this.draw = function() {
+		mat4.set(parent.mvMatrix(), mvMatrix);
+	
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
+		gl.vertexAttribPointer(renderer.shaderProgram().vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+		setMatrixUniforms();
+		gl.drawArrays(gl.TRIANGLES, 0, vertexPositionBuffer.numItems);
+	};
+	
+	var vertexPositions = data.vertices;
+	gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexPositions), gl.STATIC_DRAW);
+	vertexPositionBuffer.itemSize = 3;
+	vertexPositionBuffer.numItems = vertexPositions.length / 3;
 };
 
-CLAIRVOYANCE.WebglRenderer = function (canvas) {
-	var gl;
-	
-	function initGL() {
+CLAIRVOYANCE.Renderer = function (canvas) {
+	var gl = (function() {
+		var gl;
 		try {
 			gl = canvas.getContext("experimental-webgl");
 			gl.viewportWidth = canvas.width;
@@ -90,7 +95,18 @@ CLAIRVOYANCE.WebglRenderer = function (canvas) {
 		if (!gl) {
 			alert("Could not initialise WebGL");
 		}
+		return gl;
+	}());
+	
+	this.gl = function() {
+		return gl;
 	};
+	
+	var shaderProgram;
+	
+	this.shaderProgram = function() {
+		return shaderProgram;
+	}
 	
 	var vertexShaderSource = ["attribute vec3 aVertexPosition;",
 						
@@ -122,8 +138,6 @@ CLAIRVOYANCE.WebglRenderer = function (canvas) {
 		return shader;
 	};
 
-	var shaderProgram;
-
 	function initShaders() {
 		var vertexShader = createShader(gl, vertexShaderSource, gl.VERTEX_SHADER);
 		var fragmentShader = createShader(gl, fragmentShaderSource, gl.FRAGMENT_SHADER);
@@ -142,50 +156,31 @@ CLAIRVOYANCE.WebglRenderer = function (canvas) {
 		shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
 		gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
 
-		shaderProgram.vertexColorAttribute = gl.getAttribLocation(shaderProgram, "aVertexColor");
-		gl.enableVertexAttribArray(shaderProgram.vertexColorAttribute);
-
 		shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 		shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
 	};
+
+	initShaders();
+};
+
+CLAIRVOYANCE.Scene = function(renderer){
+	var self = this;
+
+	var nodes = new Array();
 	
 	var mvMatrix = mat4.create();
-	var mvMatrixStack = [];
+	
+	this.mvMatrix = function() {
+		return mvMatrix;
+	};
+	
 	var pMatrix = mat4.create();
+	
+	var rotationMatrix = mat4.create();
+	mat4.identity(rotationMatrix);
 
-	function mvPushMatrix() {
-		var copy = mat4.create();
-		mat4.set(mvMatrix, copy);
-		mvMatrixStack.push(copy);
-	};
-
-	function mvPopMatrix() {
-		if (mvMatrixStack.length == 0) {
-			throw "Invalid popMatrix!";
-		}
-		mvMatrix = mvMatrixStack.pop();
-	};
-	
-	var sceneRotationMatrix = mat4.create();
-	mat4.identity(sceneRotationMatrix);
-	
-	function setMatrixUniforms() {
-		gl.uniformMatrix4fv(shaderProgram.pMatrixUniform, false, pMatrix);
-		gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
-	};
-	
-	var dummyObjectPositionBuffer;
-	
-	this.onSceneLoaded = function(sceneData) {
-		var dummyVertexPositions = sceneData.meshes[0].vertices;
-		dummyObjectPositionBuffer = gl.createBuffer();
-		gl.bindBuffer(gl.ARRAY_BUFFER, dummyObjectPositionBuffer);
-		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(dummyVertexPositions), gl.STATIC_DRAW);
-		dummyObjectPositionBuffer.itemSize = 3;
-		dummyObjectPositionBuffer.numItems = dummyVertexPositions.length / 3;
-	};
-	
-	this.drawScene = function() {
+	function draw() {
+		var gl = renderer.gl();
 		gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -195,24 +190,42 @@ CLAIRVOYANCE.WebglRenderer = function (canvas) {
 
 		mat4.translate(mvMatrix, [0, 0, -20]);
 		
-		mat4.multiply(mvMatrix, sceneRotationMatrix);
+		mat4.multiply(mvMatrix, rotationMatrix);
 		
-		mvPushMatrix();
-
-		gl.bindBuffer(gl.ARRAY_BUFFER, dummyObjectPositionBuffer);
-		gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, dummyObjectPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-
-		setMatrixUniforms();
-		gl.drawArrays(gl.TRIANGLE_STRIP, 0, dummyObjectPositionBuffer.numItems);
-
-		mvPopMatrix();
+		gl.uniformMatrix4fv(renderer.shaderProgram().pMatrixUniform, false, pMatrix);
+		
+		for(var i = 0;i < nodes.length;i++) {
+			nodes[i].draw();
+		}
 	};
 	
-	this.rotate = function(rotationMatrix) {
-		mat4.multiply(rotationMatrix, sceneRotationMatrix, sceneRotationMatrix);
+	function tick() {
+		requestAnimFrame(tick);
+		draw();
 	};
 	
-	initGL();
-	initShaders();
+	function onSceneLoaded(data) {
+		for(var i = 0;i < data.meshes.length;i++) {
+			var node = new CLAIRVOYANCE.Node(data.meshes[i], renderer, self);
+			nodes.push(node);
+		}
+
+		tick();
+	};
+
+	this.load = function(filePath){
+		var request = new XMLHttpRequest();
+		request.open("GET", filePath);
+		request.onreadystatechange = function() {
+		  if (request.readyState == 4) {
+			onSceneLoaded(JSON.parse(request.responseText));
+		  }
+		}
+		request.send();
+	};
+	
+	this.rotate = function(rotationM) {
+		mat4.multiply(rotationM, rotationMatrix, rotationMatrix);
+	};
 };
 
