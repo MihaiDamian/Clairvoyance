@@ -29,20 +29,46 @@ class ClairvoyanceJSON:
 
     def __init__(self, prettyprint):
         self.prettyprint = prettyprint
+
+    def obj(self, obj_data):
+        obj = {}
+        obj['name'] = obj_data.name
+        obj['location'] = list(obj_data.location)
+        return obj
+
+    def mesh(self, mesh_data):
+        mesh = {}
+        data_vertices = []
+        for face in mesh_data.faces:
+            for vertex_id in face.vertices:
+                data_vertices += list(mesh_data.vertices[vertex_id].co)
+        mesh['vertices'] = data_vertices
+        return mesh
+
+    def camera(self, camera_data):
+        camera = {}
+        camera['clipStart'] = camera_data.clip_start
+        camera['clipEnd'] = camera_data.clip_end
+        camera['fov'] = camera_data.angle
+        return camera
     
     def create(self):
         data = {}
-        data_meshes = []
-        for mesh in bpy.data.meshes:
-            data_mesh = {}
-            data_mesh['name'] = mesh.name
-            data_vertices = []
-            for face in mesh.faces:
-                for vertex_id in face.vertices:
-                    data_vertices += list(mesh.vertices[vertex_id].co)
-            data_mesh['vertices'] = data_vertices
-            data_meshes.append(data_mesh)
-        data['meshes'] = data_meshes
+        data['meshes'] = []
+        data['cameras'] = []
+
+        #TODO: find a way to identify the actual active scene
+        active_scene = bpy.data.scenes[0]
+
+        for scene_object in active_scene.objects:
+            obj = self.obj(scene_object)
+            obj_data = scene_object.data
+            if scene_object.type == 'MESH':
+                obj.update(self.mesh(obj_data))
+                data['meshes'].append(obj)
+            elif scene_object.type == 'CAMERA':
+                obj.update(self.camera(obj_data))
+                data['cameras'].append(obj)
         
         if self.prettyprint:
             self.string = json.dumps(data, sort_keys=True, indent=4)
