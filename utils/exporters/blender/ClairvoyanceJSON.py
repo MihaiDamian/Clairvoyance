@@ -34,6 +34,7 @@ class ClairvoyanceJSON:
         obj = {}
         obj['name'] = obj_data.name
         obj['location'] = list(obj_data.location)
+        obj['rotation'] = list(obj_data.rotation_euler)
         return obj
 
     def mesh(self, mesh_data):
