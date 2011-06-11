@@ -5,7 +5,7 @@
  * renderer - a Renderer object
 */
 
-CLAIRVOYANCE.Scene = function(renderer) {
+CLAIRVOYANCE.Scene = function Scene(renderer) {
 	var self = this;
 	
 	var node = new CLAIRVOYANCE.Node({renderer: renderer});

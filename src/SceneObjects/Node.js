@@ -7,7 +7,7 @@
 														rotation: optional, an Euler XYZ rotation array with angles in radians,
 														vertices: optional, an array with mesh vertex coordinates})
 */
-CLAIRVOYANCE.Node = function(args) {
+CLAIRVOYANCE.Node = function Node(args) {
 	var self = this;
 	
 	var parent = args.parent;

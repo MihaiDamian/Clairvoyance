@@ -4,7 +4,7 @@
  * document - the HTML document
  * scene - a Scene object
 */
-CLAIRVOYANCE.Controller = function(canvas, document, scene) {
+CLAIRVOYANCE.Controller = function Controller(canvas, document, scene) {
 	var mouseDown = false;
 	var lastMouseX = null;
 	var lastMouseY = null;

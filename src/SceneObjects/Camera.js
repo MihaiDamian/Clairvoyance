@@ -3,7 +3,7 @@
  * data - an object literal from which to create a Camera
  * scene - a Scene object
 */
-CLAIRVOYANCE.Camera = function(data, scene) {
+CLAIRVOYANCE.Camera = function Camera(data, scene) {
 	var node = new CLAIRVOYANCE.Node(data);
 	exposeProperties(this, node);
 

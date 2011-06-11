@@ -2,7 +2,7 @@
  * Params:
  * canvas - the HTML canvas element
 */
-CLAIRVOYANCE.Renderer = function (canvas) {
+CLAIRVOYANCE.Renderer = function Renderer(canvas) {
 	var gl = null;
 	
 	this.gl = function() {
