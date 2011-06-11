@@ -49,12 +49,7 @@ CLAIRVOYANCE.Scene = function(renderer) {
 		currentCamera = new CLAIRVOYANCE.Camera(data.cameras[0], self);
 		
 		for(var i = 0;i < data.meshes.length;i++) {
-			var meshData = data.meshes[i];
-			var mesh = new CLAIRVOYANCE.Node({parent: self,
-											renderer: renderer,
-											location: meshData.location,
-											rotation: meshData.rotation,
-											vertices: meshData.vertices});
+			var mesh = new CLAIRVOYANCE.Node(data.meshes[i]);
 			self.addChild(mesh);
 		}
 
@@ -75,4 +70,7 @@ CLAIRVOYANCE.Scene = function(renderer) {
 	this.rotate = function(rotationM) {
 		mat4.multiply(rotationM, rotationMatrix, rotationMatrix);
 	};
+	
+	// Since Scene has no parent nodes it must call onEnter itself
+	this.onEnter();
 };

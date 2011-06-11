@@ -1,15 +1,23 @@
 /*
  * Params:
  * args - an object specifier for creating nodes (e.g.: {parent: optional, another Node object,
-														renderer: a Renderer object,
+														renderer: optional, a Renderer object
 														location: optional, a coordinates array,
 														name: optional,
 														rotation: optional, an Euler XYZ rotation array with angles in radians,
 														vertices: optional, an array with mesh vertex coordinates})
 */
 CLAIRVOYANCE.Node = function(args) {
-	var renderer = args.renderer;
-	var gl = renderer.gl();
+	var self = this;
+	
+	var parent = args.parent;
+	
+	this.setParent = function(node) {
+		parent = node;
+	}
+
+	this.renderer = args.renderer;
+	var gl = null;
 	
 	var mvMatrix = mat4.create();
 
@@ -22,6 +30,8 @@ CLAIRVOYANCE.Node = function(args) {
 	
 	this.addChild = function(child) {
 		children.push(child);
+		child.setParent(self);
+		child.onEnter();
 	};
 	
 	function setMatrixUniforms() {
@@ -38,8 +48,8 @@ CLAIRVOYANCE.Node = function(args) {
 	};
 	
 	this.draw = function() {
-		if(args.hasOwnProperty('parent')) {
-			mat4.set(args.parent.mvMatrix(), mvMatrix);
+		if(typeof parent != 'undefined') {
+			mat4.set(parent.mvMatrix(), mvMatrix);
 		}
 		
 		mat4.translate(mvMatrix, location);
@@ -60,13 +70,10 @@ CLAIRVOYANCE.Node = function(args) {
 		}
 	};
 	
-	(function() {
-		if(args.hasOwnProperty('location')) {
-			location = args.location;
-		}
-		if(args.hasOwnProperty('rotation')) {
-			rotation = args.rotation;
-		}
+	this.onEnter = function() {
+		renderer = args.renderer || parent.renderer;
+		gl = renderer.gl();
+	
 		if(args.hasOwnProperty('vertices')) {
 			vertexPositionBuffer = gl.createBuffer();
 			var vertexPositions = args.vertices;
@@ -74,6 +81,16 @@ CLAIRVOYANCE.Node = function(args) {
 			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexPositions), gl.STATIC_DRAW);
 			vertexPositionBuffer.itemSize = 3;
 			vertexPositionBuffer.numItems = vertexPositions.length / 3;
+		}
+	};
+	
+	(function() {
+		if(args.hasOwnProperty('location')) {
+			location = args.location;
+		}
+		
+		if(args.hasOwnProperty('rotation')) {
+			rotation = args.rotation;
 		}
 	}());
 };
