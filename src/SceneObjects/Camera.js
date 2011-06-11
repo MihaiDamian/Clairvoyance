@@ -4,11 +4,12 @@
  * scene - a Scene object
 */
 CLAIRVOYANCE.Camera = function(data, scene) {
+	var node = new CLAIRVOYANCE.Node(data);
+	exposeProperties(this, node);
+
 	var clipStart = data.clipStart;
 	var clipEnd = data.clipEnd;
 	var fov = CLAIRVOYANCE.MathUtils.radToDeg(data.fov);
-	var location = data.location;
-	var rotation = data.rotation;
 	
 	this.draw = function() {
 		var gl = scene.gl();
