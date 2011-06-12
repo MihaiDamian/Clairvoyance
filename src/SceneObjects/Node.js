@@ -35,7 +35,7 @@ CLAIRVOYANCE.Node = function Node(args) {
 	};
 	
 	function setMatrixUniforms() {
-		var shaderProgram = renderer.shaderProgram();
+		var shaderProgram = self.renderer.shaderProgram();
 		gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
 	};
 	
@@ -59,7 +59,7 @@ CLAIRVOYANCE.Node = function Node(args) {
 	
 		if(vertexPositionBuffer != null) {
 			gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
-			gl.vertexAttribPointer(renderer.shaderProgram().vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+			gl.vertexAttribPointer(this.renderer.shaderProgram().vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
 			setMatrixUniforms();
 			gl.drawArrays(gl.TRIANGLES, 0, vertexPositionBuffer.numItems);
@@ -71,8 +71,8 @@ CLAIRVOYANCE.Node = function Node(args) {
 	};
 	
 	this.onEnter = function() {
-		renderer = args.renderer || parent.renderer;
-		gl = renderer.gl();
+		this.renderer = args.renderer || parent.renderer;
+		gl = this.renderer.gl();
 	
 		if(args.hasOwnProperty('vertices')) {
 			vertexPositionBuffer = gl.createBuffer();

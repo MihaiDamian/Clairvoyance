@@ -1,3 +1,5 @@
+"use strict";
+
 var CLAIRVOYANCE = CLAIRVOYANCE || function(canvasID, sceneFilePath) {
 		var canvas = document.getElementById(canvasID);
 		var renderer = new CLAIRVOYANCE.Renderer(canvas);
