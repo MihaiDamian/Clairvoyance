@@ -8,25 +8,20 @@
 														vertices: optional, an array with mesh vertex coordinates})
 */
 CLAIRVOYANCE.Node = function Node(args) {
-	var self = this;
-	
-	var parent = args.parent;
+	var self = this,
+		parent = args.parent,
+		gl,
+		mvMatrix = mat4.create(),
+		vertexPositionBuffer,
+		location = [0, 0, 0],
+		rotation = [0, 0, 0],
+		children = [];
 	
 	this.setParent = function(node) {
 		parent = node;
-	}
+	};
 
 	this.renderer = args.renderer;
-	var gl = null;
-	
-	var mvMatrix = mat4.create();
-
-	var vertexPositionBuffer = null;
-	
-	var location = new Array(0, 0, 0);
-	var rotation = new Array(0, 0, 0);
-	
-	var children = new Array();
 	
 	this.addChild = function(child) {
 		children.push(child);
@@ -37,7 +32,7 @@ CLAIRVOYANCE.Node = function Node(args) {
 	function setMatrixUniforms() {
 		var shaderProgram = self.renderer.shaderProgram();
 		gl.uniformMatrix4fv(shaderProgram.mvMatrixUniform, false, mvMatrix);
-	};
+	}
 	
 	this.gl = function() {
 		return gl;
@@ -47,8 +42,15 @@ CLAIRVOYANCE.Node = function Node(args) {
 		return mvMatrix;
 	};
 	
+	function drawChildren() {
+		var i;
+		for(i = 0;i < children.length;i++) {
+			children[i].draw();
+		}
+	}
+	
 	this.draw = function() {
-		if(typeof parent != 'undefined') {
+		if(typeof parent !== 'undefined') {
 			mat4.set(parent.mvMatrix(), mvMatrix);
 		}
 		
@@ -57,7 +59,7 @@ CLAIRVOYANCE.Node = function Node(args) {
 		mat4.rotateY(mvMatrix, rotation[1]);
 		mat4.rotateZ(mvMatrix, rotation[2]);
 	
-		if(vertexPositionBuffer != null) {
+		if(typeof vertexPositionBuffer !== 'undefined') {
 			gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
 			gl.vertexAttribPointer(self.renderer.shaderProgram().vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
@@ -65,15 +67,10 @@ CLAIRVOYANCE.Node = function Node(args) {
 			gl.drawArrays(gl.TRIANGLES, 0, vertexPositionBuffer.numItems);
 		}
 		
-		for(var i = 0;i < children.length;i++) {
-			children[i].draw();
-		}
+		drawChildren();
 	};
 	
-	this.onEnter = function() {
-		self.renderer = args.renderer || parent.renderer;
-		gl = self.renderer.gl();
-	
+	function setupVertexData() {
 		if(args.hasOwnProperty('vertices')) {
 			vertexPositionBuffer = gl.createBuffer();
 			var vertexPositions = args.vertices;
@@ -82,6 +79,13 @@ CLAIRVOYANCE.Node = function Node(args) {
 			vertexPositionBuffer.itemSize = 3;
 			vertexPositionBuffer.numItems = vertexPositions.length / 3;
 		}
+	}
+	
+	this.onEnter = function() {
+		self.renderer = args.renderer || parent.renderer;
+		gl = self.renderer.gl();
+		
+		setupVertexData();
 	};
 	
 	(function() {

@@ -6,17 +6,11 @@
 */
 
 CLAIRVOYANCE.Scene = function Scene(renderer) {
-	var self = this;
-	
-	var node = new CLAIRVOYANCE.Node({renderer: renderer});
-	exposeProperties(this, node);
-	
-	var currentCamera = null;
-	
-	var pMatrix = mat4.create();
-	
-	var rotationMatrix = mat4.create();
-	mat4.identity(rotationMatrix);
+	var self = this,
+		node = new CLAIRVOYANCE.Node({renderer: renderer}),
+		currentCamera,
+		pMatrix = mat4.create(),
+		rotationMatrix = mat4.create();
 	
 	this.pMatrix = function() {
 		return pMatrix;
@@ -35,34 +29,39 @@ CLAIRVOYANCE.Scene = function Scene(renderer) {
 		gl.uniformMatrix4fv(renderer.shaderProgram().pMatrixUniform, false, pMatrix);
 		
 		node.draw();
-	};
+	}
 	
 	function tick() {
 		requestAnimFrame(tick);
 		draw();
-	};
+	}
+	
+	function createMeshes(data) {
+		var i, mesh;
+		for(i = 0;i < data.meshes.length;i++) {
+			mesh = new CLAIRVOYANCE.Node(data.meshes[i]);
+			currentCamera.addChild(mesh);
+		}
+	}
 	
 	function onSceneLoaded(data) {
 		// always picking first camera
 		currentCamera = new CLAIRVOYANCE.Camera(data.cameras[0], self);
 		self.addChild(currentCamera);
 		
-		for(var i = 0;i < data.meshes.length;i++) {
-			var mesh = new CLAIRVOYANCE.Node(data.meshes[i]);
-			currentCamera.addChild(mesh);
-		}
+		createMeshes(data);
 
 		tick();
-	};
+	}
 
 	this.load = function(filePath){
 		var request = new XMLHttpRequest();
 		request.open("GET", filePath);
 		request.onreadystatechange = function() {
-		  if (request.readyState == 4) {
+		  if (request.readyState === 4) {
 			onSceneLoaded(JSON.parse(request.responseText));
 		  }
-		}
+		};
 		request.send();
 	};
 	
@@ -70,6 +69,11 @@ CLAIRVOYANCE.Scene = function Scene(renderer) {
 		mat4.multiply(rotationM, rotationMatrix, rotationMatrix);
 	};
 	
-	// Since Scene has no parent nodes it must call onEnter itself
-	this.onEnter();
+	(function() {
+		exposeProperties(self, node);
+	
+		mat4.identity(rotationMatrix);
+	
+		self.onEnter();
+	}());
 };

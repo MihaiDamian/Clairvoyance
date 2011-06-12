@@ -10,4 +10,4 @@ function exposeProperties(target, source) {
 		}
 	}
 	return target;
-};
+}

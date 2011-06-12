@@ -5,40 +5,44 @@
  * scene - a Scene object
 */
 CLAIRVOYANCE.Controller = function Controller(canvas, document, scene) {
-	var mouseDown = false;
-	var lastMouseX = null;
-	var lastMouseY = null;
+	var mouseDown = false,
+		lastMouseX,
+		lastMouseY;
 	
 	function handleMouseDown(event) {
 		mouseDown = true;
 		lastMouseX = event.clientX;
 		lastMouseY = event.clientY;
-	};
+	}
 
 	function handleMouseUp(event) {
 		mouseDown = false;
-	};
+	}
+	
+	function rotationAngle(newPos, lastPos) {
+		var delta = newPos - lastPos;
+		return CLAIRVOYANCE.MathUtils.degToRad(delta / 10);
+	}
 
 	function handleMouseMove(event) {
+		var newX, newY, newRotationMatrix;
+		
 		if (!mouseDown) {
 			return;
 		}
-		var newX = event.clientX;
-		var newY = event.clientY;
-
-		var deltaX = newX - lastMouseX;
-		var newRotationMatrix = mat4.create();
+		
+		newX = event.clientX;
+		newY = event.clientY;
+		
+		newRotationMatrix = mat4.create();
 		mat4.identity(newRotationMatrix);
-		var yAngle = CLAIRVOYANCE.MathUtils.degToRad(deltaX / 10);
-		mat4.rotate(newRotationMatrix, yAngle, [0, 1, 0]);
 
-		var deltaY = newY - lastMouseY;
-		var xAngle = CLAIRVOYANCE.MathUtils.degToRad(deltaY / 10);
-		mat4.rotate(newRotationMatrix, xAngle, [1, 0, 0]);
+		mat4.rotate(newRotationMatrix, rotationAngle(newX, lastMouseX), [0, 1, 0]);
+		mat4.rotate(newRotationMatrix, rotationAngle(newY, lastMouseY), [1, 0, 0]);
 
 		scene.rotate(newRotationMatrix);
 
-		lastMouseX = newX
+		lastMouseX = newX;
 		lastMouseY = newY;
 	}
 	
