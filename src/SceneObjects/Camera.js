@@ -16,5 +16,7 @@ CLAIRVOYANCE.Camera = function Camera(data, scene) {
 		mat4.perspective(fov, gl.viewportWidth / gl.viewportHeight, clipStart, clipEnd, scene.pMatrix());
 		//TODO: use translation and rotation from data
 		mat4.translate(scene.mvMatrix(), [0, 0, -20]);
+		
+		node.draw();
 	};
 };

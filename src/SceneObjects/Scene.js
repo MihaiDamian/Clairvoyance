@@ -29,8 +29,6 @@ CLAIRVOYANCE.Scene = function Scene(renderer) {
 
 		mat4.identity(self.mvMatrix());
 		
-		currentCamera.draw();
-		
 		//TODO: apply the rotation to the camera
 		mat4.multiply(self.mvMatrix(), rotationMatrix);
 		
@@ -47,10 +45,11 @@ CLAIRVOYANCE.Scene = function Scene(renderer) {
 	function onSceneLoaded(data) {
 		// always picking first camera
 		currentCamera = new CLAIRVOYANCE.Camera(data.cameras[0], self);
+		self.addChild(currentCamera);
 		
 		for(var i = 0;i < data.meshes.length;i++) {
 			var mesh = new CLAIRVOYANCE.Node(data.meshes[i]);
-			self.addChild(mesh);
+			currentCamera.addChild(mesh);
 		}
 
 		tick();

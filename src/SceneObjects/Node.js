@@ -59,7 +59,7 @@ CLAIRVOYANCE.Node = function Node(args) {
 	
 		if(vertexPositionBuffer != null) {
 			gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
-			gl.vertexAttribPointer(this.renderer.shaderProgram().vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+			gl.vertexAttribPointer(self.renderer.shaderProgram().vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
 			setMatrixUniforms();
 			gl.drawArrays(gl.TRIANGLES, 0, vertexPositionBuffer.numItems);
@@ -71,8 +71,8 @@ CLAIRVOYANCE.Node = function Node(args) {
 	};
 	
 	this.onEnter = function() {
-		this.renderer = args.renderer || parent.renderer;
-		gl = this.renderer.gl();
+		self.renderer = args.renderer || parent.renderer;
+		gl = self.renderer.gl();
 	
 		if(args.hasOwnProperty('vertices')) {
 			vertexPositionBuffer = gl.createBuffer();
