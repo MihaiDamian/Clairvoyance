@@ -35,6 +35,10 @@ CLAIRVOYANCE.Node = function Node(args) {
 	this.setRotation = function(newRotation) {
 		rotation = newRotation;
 	};
+	
+	this.rotate = function(rotationVec) {
+		rotation = vec3.add(rotation, rotationVec);
+	};
 
 	this.renderer = function() {
 		return renderer;

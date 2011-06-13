@@ -3,14 +3,14 @@
  *
  * Params:
  * renderer - a Renderer object
+ * controller - a Controller object
 */
 
-CLAIRVOYANCE.Scene = function Scene(renderer) {
+CLAIRVOYANCE.Scene = function Scene(renderer, controller) {
 	var self = this,
 		node = new CLAIRVOYANCE.Node({renderer: renderer}),
 		currentCamera,
-		pMatrix = mat4.create(),
-		rotationMatrix = mat4.create();
+		pMatrix = mat4.create();
 		
 	exposeProperties(self, node);
 	
@@ -24,9 +24,6 @@ CLAIRVOYANCE.Scene = function Scene(renderer) {
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
 		mat4.identity(self.mvMatrix());
-		
-		//TODO: apply the rotation to the camera
-		mat4.multiply(self.mvMatrix(), rotationMatrix);
 		
 		gl.uniformMatrix4fv(renderer.shaderProgram().pMatrixUniform, false, pMatrix);
 		
@@ -50,6 +47,7 @@ CLAIRVOYANCE.Scene = function Scene(renderer) {
 		// always picking first camera
 		currentCamera = new CLAIRVOYANCE.Camera(data.cameras[0], self);
 		self.addChild(currentCamera);
+		controller.setControlledNode(currentCamera);
 		
 		createMeshes(data);
 
@@ -67,13 +65,7 @@ CLAIRVOYANCE.Scene = function Scene(renderer) {
 		request.send();
 	};
 	
-	this.rotate = function(rotationM) {
-		mat4.multiply(rotationM, rotationMatrix, rotationMatrix);
-	};
-	
 	(function() {
-		mat4.identity(rotationMatrix);
-	
 		self.onEnter();
 	}());
 };

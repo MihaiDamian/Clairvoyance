@@ -2,12 +2,26 @@
  * Params:
  * canvas - the HTML canvas element
  * document - the HTML document
- * scene - a Scene object
 */
-CLAIRVOYANCE.Controller = function Controller(canvas, document, scene) {
+CLAIRVOYANCE.Controller = function Controller(canvas, document) {
 	var mouseDown = false,
 		lastMouseX,
-		lastMouseY;
+		lastMouseY,
+		controlledNode;
+		
+	function registerForEvents() {
+		canvas.onmousedown = handleMouseDown;
+		document.onmouseup = handleMouseUp;
+		document.onmousemove = handleMouseMove;
+	}
+		
+	this.setControlledNode = function(node) {
+		if(typeof controlledNode === 'undefined') {
+			registerForEvents();
+		}
+		
+		controlledNode = node;
+	};
 	
 	function handleMouseDown(event) {
 		mouseDown = true;
@@ -25,7 +39,7 @@ CLAIRVOYANCE.Controller = function Controller(canvas, document, scene) {
 	}
 
 	function handleMouseMove(event) {
-		var newX, newY, newRotationMatrix;
+		var newX, newY, rotationVec;
 		
 		if (!mouseDown) {
 			return;
@@ -33,20 +47,12 @@ CLAIRVOYANCE.Controller = function Controller(canvas, document, scene) {
 		
 		newX = event.clientX;
 		newY = event.clientY;
-		
-		newRotationMatrix = mat4.create();
-		mat4.identity(newRotationMatrix);
 
-		mat4.rotate(newRotationMatrix, rotationAngle(newX, lastMouseX), [0, 1, 0]);
-		mat4.rotate(newRotationMatrix, rotationAngle(newY, lastMouseY), [1, 0, 0]);
+		rotationVec = [rotationAngle(newY, lastMouseY), rotationAngle(newX, lastMouseX), 0];
 
-		scene.rotate(newRotationMatrix);
+		controlledNode.rotate(rotationVec);
 
 		lastMouseX = newX;
 		lastMouseY = newY;
 	}
-	
-	canvas.onmousedown = handleMouseDown;
-	document.onmouseup = handleMouseUp;
-	document.onmousemove = handleMouseMove;
 };

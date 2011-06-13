@@ -4,8 +4,8 @@
 var CLAIRVOYANCE = CLAIRVOYANCE || function(canvasID, sceneFilePath) {
 		var canvas = document.getElementById(canvasID),
 			renderer = new CLAIRVOYANCE.Renderer(canvas),
-			scene = new CLAIRVOYANCE.Scene(renderer);
+			controller = new CLAIRVOYANCE.Controller(canvas, document),
+			scene = new CLAIRVOYANCE.Scene(renderer, controller);
 			
-		CLAIRVOYANCE.Controller(canvas, document, scene);
 		scene.load(sceneFilePath); 
 };
