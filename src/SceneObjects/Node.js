@@ -15,10 +15,27 @@ CLAIRVOYANCE.Node = function Node(args) {
 		vertexPositionBuffer,
 		location = [0, 0, 0],
 		rotation = [0, 0, 0],
-		children = [];
+		children = [],
+		transforms = [];
 	
 	this.setParent = function(node) {
 		parent = node;
+	};
+	
+	this.location = function() {
+		return location;
+	};
+	
+	this.setLocation = function(newLocation) {
+		location = newLocation;
+	};
+	
+	this.rotation = function() {
+		return rotation;
+	};
+	
+	this.setRotation = function(newRotation) {
+		rotation = newRotation;
 	};
 
 	this.renderer = args.renderer;
@@ -49,15 +66,29 @@ CLAIRVOYANCE.Node = function Node(args) {
 		}
 	}
 	
+	function translateTransform() {
+		mat4.translate(mvMatrix, location);
+	}
+	
+	function rotateTransfrom() {
+		mat4.rotateX(mvMatrix, rotation[0]);
+		mat4.rotateY(mvMatrix, rotation[1]);
+		mat4.rotateZ(mvMatrix, rotation[2]);
+	}
+	
+	function applyTransforms() {
+		var i;
+		for(i = 0;i < transforms.length;i++) {
+			transforms[i]();
+		}
+	}
+	
 	this.draw = function() {
 		if(typeof parent !== 'undefined') {
 			mat4.set(parent.mvMatrix(), mvMatrix);
 		}
 		
-		mat4.translate(mvMatrix, location);
-		mat4.rotateX(mvMatrix, rotation[0]);
-		mat4.rotateY(mvMatrix, rotation[1]);
-		mat4.rotateZ(mvMatrix, rotation[2]);
+		applyTransforms();
 	
 		if(typeof vertexPositionBuffer !== 'undefined') {
 			gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
@@ -88,6 +119,14 @@ CLAIRVOYANCE.Node = function Node(args) {
 		setupVertexData();
 	};
 	
+	this.useTranslateRotateScaleTransforms = function() {
+		transforms = [translateTransform, rotateTransfrom];
+	};
+	
+	this.useScaleRotateTranslateTransforms = function() {
+		transforms = [rotateTransfrom, translateTransform];
+	};
+	
 	(function() {
 		if(args.hasOwnProperty('location')) {
 			location = args.location;
@@ -96,5 +135,7 @@ CLAIRVOYANCE.Node = function Node(args) {
 		if(args.hasOwnProperty('rotation')) {
 			rotation = args.rotation;
 		}
+		
+		self.useTranslateRotateScaleTransforms();
 	}());
 };
