@@ -11,3 +11,15 @@ function exposeProperties(target, source) {
 	}
 	return target;
 }
+
+/*
+ * Set an event handler as an annonymous function that wraps the old handler and the new one;
+ * useful for out of library events where you can't be sure if someone registered a handler before or not
+*/
+function addEventHandler(targetObj, eventName, eventHandler) {
+	var oldHandler = targetObj[eventName] || function (){};
+	targetObj[eventName] = function () {
+		oldHandler.apply(targetObj, arguments);
+		eventHandler.apply(targetObj, arguments);
+	};
+}
