@@ -1,3 +1,5 @@
+//TODO: these functions should also be part of the library namespace
+
 /*
  * Shallow copies all public properties from the source to the target. The target object will then become a wrapper over the source object
 */
