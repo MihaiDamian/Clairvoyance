@@ -11,6 +11,8 @@ CLAIRVOYANCE.Scene = function Scene(renderer) {
 		currentCamera,
 		pMatrix = mat4.create(),
 		rotationMatrix = mat4.create();
+		
+	exposeProperties(self, node);
 	
 	this.pMatrix = function() {
 		return pMatrix;
@@ -70,8 +72,6 @@ CLAIRVOYANCE.Scene = function Scene(renderer) {
 	};
 	
 	(function() {
-		exposeProperties(self, node);
-	
 		mat4.identity(rotationMatrix);
 	
 		self.onEnter();
