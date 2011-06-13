@@ -41,7 +41,7 @@ CLAIRVOYANCE.Scene = function Scene(renderer) {
 	function createMeshes(data) {
 		var i, mesh;
 		for(i = 0;i < data.meshes.length;i++) {
-			mesh = new CLAIRVOYANCE.Node(data.meshes[i]);
+			mesh = new CLAIRVOYANCE.Mesh(data.meshes[i]);
 			currentCamera.addChild(mesh);
 		}
 	}

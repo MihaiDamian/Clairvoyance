@@ -13,7 +13,7 @@ CLAIRVOYANCE.Camera = function Camera(data, scene) {
 	exposeProperties(self, node);
 	
 	this.draw = function() {
-		var gl = scene.gl();
+		var gl = scene.renderer().gl();
 		mat4.perspective(fov, gl.viewportWidth / gl.viewportHeight, clipStart, clipEnd, scene.pMatrix());
 		
 		node.draw();
