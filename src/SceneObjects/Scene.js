@@ -12,7 +12,7 @@ CLAIRVOYANCE.Scene = function Scene(renderer, controller) {
 		currentCamera,
 		pMatrix = mat4.create();
 		
-	exposeProperties(self, node);
+	CLAIRVOYANCE.ObjectUtils.exposeProperties(self, node);
 	
 	this.pMatrix = function() {
 		return pMatrix;

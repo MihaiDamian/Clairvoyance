@@ -10,7 +10,7 @@ CLAIRVOYANCE.Camera = function Camera(data, scene) {
 		clipEnd = data.clipEnd,
 		fov = CLAIRVOYANCE.MathUtils.radToDeg(data.fov);
 		
-	exposeProperties(self, node);
+	CLAIRVOYANCE.ObjectUtils.exposeProperties(self, node);
 	
 	this.draw = function() {
 		var gl = scene.renderer().gl();

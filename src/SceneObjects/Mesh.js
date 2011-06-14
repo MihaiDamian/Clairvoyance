@@ -7,7 +7,7 @@ CLAIRVOYANCE.Mesh = function Mesh(data) {
 		node = new CLAIRVOYANCE.Node(data),
 		vertexPositionBuffer;
 	
-	exposeProperties(self, node);
+	CLAIRVOYANCE.ObjectUtils.exposeProperties(self, node);
 	
 	function setupVertexData() {
 		var gl = self.renderer().gl();

@@ -10,9 +10,9 @@ CLAIRVOYANCE.Controller = function Controller(canvas, document) {
 		controlledNode;
 		
 	function registerForEvents() {
-		addEventHandler(canvas, "onmousedown", handleMouseDown);
-		addEventHandler(document, "onmouseup", handleMouseUp);
-		addEventHandler(document, "onmousemove", handleMouseMove);
+		CLAIRVOYANCE.ObjectUtils.addEventHandler(canvas, "onmousedown", handleMouseDown);
+		CLAIRVOYANCE.ObjectUtils.addEventHandler(document, "onmouseup", handleMouseUp);
+		CLAIRVOYANCE.ObjectUtils.addEventHandler(document, "onmousemove", handleMouseMove);
 	}
 		
 	this.setControlledNode = function(node) {
