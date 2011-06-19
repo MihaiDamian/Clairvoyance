@@ -1,46 +1,33 @@
-CLAIRVOYANCE.Renderer = function (canvas) {
-	var gl = (function() {
-		var gl;
-		try {
-			gl = canvas.getContext("experimental-webgl");
-			gl.viewportWidth = canvas.width;
-			gl.viewportHeight = canvas.height;
-			gl.clearColor(0.0, 0.0, 0.0, 1.0);
-			gl.enable(gl.DEPTH_TEST);
-		} catch (e) {
-		}
-		if (!gl) {
-			alert("Could not initialise WebGL");
-		}
-		return gl;
-	}());
-	
-	this.gl = function() {
-		return gl;
-	};
-	
-	var shaderProgram;
-	
-	this.shaderProgram = function() {
-		return shaderProgram;
-	}
-	
-	var vertexShaderSource = ["attribute vec3 aVertexPosition;",
+/*
+ * Params:
+ * canvas - the HTML canvas element
+*/
+CLAIRVOYANCE.Renderer = function Renderer(canvas) {
+	var gl,
+		shaderProgram,
+		vertexShaderSource = ["attribute vec3 aVertexPosition;",
 						
 						    "uniform mat4 uMVMatrix;",
 						    "uniform mat4 uPMatrix;",
 						
 						    "void main(void) {",
 						        "gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);",
-						    "}"].join('\n');
-
-	var fragmentShaderSource = ["#ifdef GL_ES",
+						    "}"].join('\n'),
+		fragmentShaderSource = ["#ifdef GL_ES",
 								"precision highp float;",
 								"#endif",
 							
 								"void main(void) {",
 									"gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);",
-								"}"].join('\n');					   
+								"}"].join('\n');
+	
+	this.gl = function() {
+		return gl;
+	};
+	
+	this.shaderProgram = function() {
+		return shaderProgram;
+	};					   
 
 	function createShader(gl, source, type) {
 		var shader = gl.createShader(type);
@@ -53,11 +40,25 @@ CLAIRVOYANCE.Renderer = function (canvas) {
 		}
 
 		return shader;
-	};
+	}
+	
+	function initGL() {
+		try {
+			gl = canvas.getContext("experimental-webgl");
+			gl.viewportWidth = canvas.width;
+			gl.viewportHeight = canvas.height;
+			gl.clearColor(0.0, 0.0, 0.0, 1.0);
+			gl.enable(gl.DEPTH_TEST);
+		} catch (e) {
+		}
+		if (!gl) {
+			alert("Could not initialise WebGL");
+		}
+	}
 
 	function initShaders() {
-		var vertexShader = createShader(gl, vertexShaderSource, gl.VERTEX_SHADER);
-		var fragmentShader = createShader(gl, fragmentShaderSource, gl.FRAGMENT_SHADER);
+		var vertexShader = createShader(gl, vertexShaderSource, gl.VERTEX_SHADER),
+			fragmentShader = createShader(gl, fragmentShaderSource, gl.FRAGMENT_SHADER);
 
 		shaderProgram = gl.createProgram();
 		gl.attachShader(shaderProgram, vertexShader);
@@ -75,7 +76,8 @@ CLAIRVOYANCE.Renderer = function (canvas) {
 
 		shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 		shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
-	};
+	}
 
+	initGL();
 	initShaders();
 };
