@@ -4,7 +4,7 @@
 														renderer: optional, a Renderer object
 														location: optional, a coordinates array,
 														name: optional,
-														rotation: optional, an Euler XYZ rotation array with angles in radians})
+														rotation: optional, XYZW quaternion})
 */
 CLAIRVOYANCE.Node = function Node(args) {
 	var self = this,
@@ -12,7 +12,7 @@ CLAIRVOYANCE.Node = function Node(args) {
 		renderer = args.renderer,
 		mvMatrix = mat4.create(),
 		location = [0, 0, 0],
-		rotation = [0, 0, 0],
+		rotation = [0, 0, 0, 1],
 		children = [],
 		transforms = [];
 	
@@ -36,8 +36,18 @@ CLAIRVOYANCE.Node = function Node(args) {
 		rotation = newRotation;
 	};
 	
-	this.rotate = function(rotationVec) {
-		rotation = vec3.add(rotation, rotationVec);
+	function rotateByQuaternion(rotationQuat) {
+		quat4.multiply(rotation, rotationQuat);
+	}
+	
+	this.rotateByEuler = function(rotationVec) {
+		var rotationQuat = CLAIRVOYANCE.MathUtils.eulerToQuaternion(rotationVec);
+		rotateByQuaternion(rotationQuat);
+	};
+	
+	this.translate = function(translationVec) {
+		quat4.multiplyVec3(rotation, translationVec);
+		vec3.add(location, translationVec);
 	};
 
 	this.renderer = function() {
@@ -66,9 +76,8 @@ CLAIRVOYANCE.Node = function Node(args) {
 	}
 	
 	function rotateTransfrom() {
-		mat4.rotateX(mvMatrix, rotation[0]);
-		mat4.rotateY(mvMatrix, rotation[1]);
-		mat4.rotateZ(mvMatrix, rotation[2]);
+		var rotationMatrix = quat4.toMat4(rotation);
+		mat4.multiply(mvMatrix, rotationMatrix);
 	}
 	
 	function applyTransforms() {

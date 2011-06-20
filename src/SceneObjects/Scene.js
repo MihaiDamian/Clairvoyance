@@ -17,6 +17,11 @@ CLAIRVOYANCE.Scene = function Scene(renderer, controller) {
 	this.pMatrix = function() {
 		return pMatrix;
 	};
+	
+	//TODO: take into account delta time
+	function update() {
+		controller.update();
+	}
 
 	function draw() {
 		var gl = renderer.gl();
@@ -31,8 +36,9 @@ CLAIRVOYANCE.Scene = function Scene(renderer, controller) {
 	}
 	
 	function tick() {
-		requestAnimFrame(tick);
+		update();
 		draw();
+		requestAnimFrame(tick);
 	}
 	
 	function createMeshes(data) {
