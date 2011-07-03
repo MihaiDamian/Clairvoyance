@@ -72,20 +72,20 @@ CLAIRVOYANCE.Controller = function Controller(canvas, document) {
 	
 		if(currentlyPressedKeys[65]) {
             // Left key or A
-			vec3.add(translation, [0.1, 0, 0]);
+			vec3.add(translation, [-0.1, 0, 0]);
         } 
 		else if(currentlyPressedKeys[68]) {
             // Right key or D
-			vec3.add(translation, [-0.1, 0, 0]);
+			vec3.add(translation, [0.1, 0, 0]);
         }
 
         if(currentlyPressedKeys[87]) {
             // Up key or W
-			vec3.add(translation, [0, 0, 0.1]);
+			vec3.add(translation, [0, 0, -0.1]);
         } 
 		else if(currentlyPressedKeys[83]) {
             // Down key or S
-			vec3.add(translation, [0, 0, -0.1]);
+			vec3.add(translation, [0, 0, 0.1]);
         }
 		
 		return translation;
