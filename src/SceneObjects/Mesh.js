@@ -5,7 +5,8 @@
 CLAIRVOYANCE.Mesh = function Mesh(data) {
 	var self = this,
 		node = new CLAIRVOYANCE.Node(data),
-		vertexPositionBuffer;
+		vertexPositionBuffer,
+		vertexIndexBuffer;
 	
 	CLAIRVOYANCE.ObjectUtils.exposeProperties(self, node);
 	
@@ -18,6 +19,13 @@ CLAIRVOYANCE.Mesh = function Mesh(data) {
 			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexPositions), gl.STATIC_DRAW);
 			vertexPositionBuffer.itemSize = 3;
 			vertexPositionBuffer.numItems = vertexPositions.length / 3;
+			
+			vertexIndexBuffer = gl.createBuffer();
+			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, vertexIndexBuffer);
+			var vertexIndices = data.vertex_indices;
+			gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(vertexIndices), gl.STATIC_DRAW);
+			vertexIndexBuffer.itemSize = 1;
+			vertexIndexBuffer.numItems = vertexIndices.length;
 		}
 	}
 	
@@ -42,8 +50,11 @@ CLAIRVOYANCE.Mesh = function Mesh(data) {
 			gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
 			gl.vertexAttribPointer(self.renderer().shaderProgram().vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
+			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, vertexIndexBuffer);
+			
 			setMatrixUniforms();
-			gl.drawArrays(gl.TRIANGLES, 0, vertexPositionBuffer.numItems);
+			
+			gl.drawElements(gl.TRIANGLES, vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 		}
 	};
 };

@@ -47,11 +47,17 @@ class ClairvoyanceJSON:
 
     def mesh(self, mesh_data):
         mesh = {}
-        data_vertices = []
+
+        vertex_indices = []
         for face in mesh_data.faces:
-            for vertex_id in face.vertices:
-                data_vertices += list(mesh_data.vertices[vertex_id].co)
-        mesh['vertices'] = data_vertices
+            vertex_indices += face.vertices
+        mesh['vertex_indices'] = vertex_indices
+
+        vertices = []
+        for vertex in mesh_data.vertices:
+            vertices += list(vertex.co)
+        mesh['vertices'] = vertices
+        
         return mesh
 
     def camera(self, camera_data):
