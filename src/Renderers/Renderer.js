@@ -52,7 +52,7 @@ CLAIRVOYANCE.Renderer = function Renderer(canvas) {
 		} catch (e) {
 		}
 		if (!gl) {
-			alert("Could not initialise WebGL");
+			CLAIRVOYANCE.onInitializationFailure();
 		}
 	}
 
