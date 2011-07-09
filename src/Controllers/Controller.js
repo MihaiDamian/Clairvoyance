@@ -8,7 +8,8 @@ CLAIRVOYANCE.Controller = function Controller(canvas, document) {
 		lastMouseX,
 		lastMouseY,
 		controlledNode,
-		currentlyPressedKeys = {};
+		currentlyPressedKeys = {},
+		translationSpeed = 0.02;
 		
 	function registerForEvents() {
 		CLAIRVOYANCE.ObjectUtils.addEventHandler(canvas, "onmousedown", handleMouseDown);
@@ -69,7 +70,7 @@ CLAIRVOYANCE.Controller = function Controller(canvas, document) {
 	
 	function translation(deltaTime) {
 		var translation = [0, 0, 0],
-			distance = deltaTime * 0.1;
+			distance = deltaTime * translationSpeed;
 	
 		if(currentlyPressedKeys[65]) {
             // Left key or A
@@ -91,6 +92,13 @@ CLAIRVOYANCE.Controller = function Controller(canvas, document) {
 		
 		return translation;
 	}
+	
+	/*
+	* speed - in units per milisecond
+	*/
+	this.setTranslationSpeed = function(speed) {
+		translationSpeed = speed;
+	};
 	
 	this.update = function(deltaTime) {
 		controlledNode.translate(translation(deltaTime));
