@@ -1,5 +1,6 @@
 /*
  * Params:
+ *
  * canvas - the HTML canvas element
 */
 CLAIRVOYANCE.Renderer = function Renderer(canvas) {
@@ -49,10 +50,11 @@ CLAIRVOYANCE.Renderer = function Renderer(canvas) {
 			gl.viewportHeight = canvas.height;
 			gl.clearColor(0.0, 0.0, 0.0, 1.0);
 			gl.enable(gl.DEPTH_TEST);
-		} catch (e) {
-		}
-		if (!gl) {
-			CLAIRVOYANCE.onInitializationFailure();
+		} 
+		catch (e) {
+			if (!gl) {
+				throw CLAIRVOYANCE.Renderer.errors.WebGLNotSupported;
+			}
 		}
 	}
 
@@ -80,4 +82,8 @@ CLAIRVOYANCE.Renderer = function Renderer(canvas) {
 
 	initGL();
 	initShaders();
+};
+
+CLAIRVOYANCE.Renderer.errors = {
+	WebGLNotSupported : "Error.Renderer.WebGLNotSupported"
 };

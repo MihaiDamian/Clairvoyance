@@ -5,12 +5,12 @@
  * renderer - a Renderer object
  * controller - a Controller object
 */
-
 CLAIRVOYANCE.Scene = function Scene(renderer, controller) {
 	var self = this,
 		node = new CLAIRVOYANCE.Node({renderer: renderer}),
 		currentCamera,
-		pMatrix = mat4.create();
+		pMatrix = mat4.create(),
+		renderLoop;
 		
 	CLAIRVOYANCE.ObjectUtils.exposeProperties(self, node);
 	
@@ -18,9 +18,8 @@ CLAIRVOYANCE.Scene = function Scene(renderer, controller) {
 		return pMatrix;
 	};
 	
-	//TODO: take into account delta time
-	function update() {
-		controller.update();
+	function update(deltaTime) {
+		controller.update(deltaTime);
 	}
 
 	function draw() {
@@ -35,10 +34,9 @@ CLAIRVOYANCE.Scene = function Scene(renderer, controller) {
 		node.draw();
 	}
 	
-	function tick() {
-		update();
+	function onRenderFrame(deltaTime) {
+		update(deltaTime);
 		draw();
-		requestAnimFrame(tick);
 	}
 	
 	function createMeshes(data) {
@@ -57,7 +55,7 @@ CLAIRVOYANCE.Scene = function Scene(renderer, controller) {
 		
 		createMeshes(data);
 
-		tick();
+		renderLoop = new CLAIRVOYANCE.RenderLoop(onRenderFrame);
 	}
 
 	this.load = function(filePath){

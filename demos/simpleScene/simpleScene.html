@@ -7,13 +7,14 @@
 		<script src="../../build/clairvoyance.js"></script>
 		<script>
 		<!--
-			function onInitializationFailure() {
-				alert("Failed to initialize. Check your browser compatibility");
-			}
-		
 			function setupScene() {
-				CLAIRVOYANCE.onInitializationFailure = onInitializationFailure;
-				CLAIRVOYANCE.init('canvas', 'simpleScene.js');
+				var engine;
+				try {
+					engine = new CLAIRVOYANCE.Engine('canvas', 'simpleScene.js');
+				}
+				catch (exception) {
+					alert(exception);
+				}
 			}
 		-->
 		</script>
