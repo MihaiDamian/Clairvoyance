@@ -1,8 +1,8 @@
 bl_info = {
     "name": "Clairvoyance JSON Exporter",
     "author": "Mihai Damian",
-    "blender": (2, 5, 7),
-    "api": 36339,
+    "blender": (2, 5, 8),
+    "api": 38019,
     "location": "File > Import-Export",
     "description": "Export to JSON Format",
     "warning": "",
@@ -20,7 +20,7 @@ import json
 
 import bpy
 from bpy.props import BoolProperty
-from io_utils import ExportHelper
+from bpy_extras.io_utils import ExportHelper
 
 
 class ClairvoyanceJSON:
@@ -45,13 +45,40 @@ class ClairvoyanceJSON:
         
         return obj
 
+    def material(self, material_data):
+        material = {}
+        texture = {}
+        texture_data = material_data.active_texture
+        if texture_data is not None:
+            if texture_data.type == 'IMAGE':
+                texture['path'] = texture_data.image.filepath
+        material['texture'] = texture
+        return material
+
     def mesh(self, mesh_data):
         mesh = {}
 
-        vertex_indices = []
-        for face in mesh_data.faces:
-            vertex_indices += face.vertices
-        mesh['vertex_indices'] = vertex_indices
+        materials = []
+        for material_index, material_data in enumerate(mesh_data.materials):
+            material = self.material(material_data)
+            material['index'] = material_index
+            materials.append(material)
+        mesh['materials'] = materials
+
+        mesh_is_textured = len(mesh_data.uv_textures) > 0
+
+        faces = []
+        if mesh_is_textured:
+            uv_texture_layer = mesh_data.uv_textures[0]
+        for face_index, face_data in enumerate(mesh_data.faces):
+            face = {}
+            if mesh_is_textured:
+                texture_face = uv_texture_layer.data[face_index]
+                face['uv_coords'] = texture_face.uv_raw[:6]
+            face['vertex_indices'] = list(face_data.vertices)
+            face['material_index'] = face_data.material_index
+            faces.append(face)
+        mesh['faces'] = faces
 
         vertices = []
         for vertex in mesh_data.vertices:
@@ -71,6 +98,8 @@ class ClairvoyanceJSON:
         data = {}
         data['meshes'] = []
         data['cameras'] = []
+
+        bpy.ops.object.mode_set(mode='OBJECT')
 
         #TODO: find a way to identify the actual active scene
         active_scene = bpy.data.scenes[0]

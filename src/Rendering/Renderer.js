@@ -43,6 +43,15 @@ CLAIRVOYANCE.Renderer = function Renderer(canvas) {
 		return shader;
 	}
 	
+	this.createVertexIndexBuffer = function(vertexIndices) {
+		var vertexIndexBuffer = gl.createBuffer();
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, vertexIndexBuffer);
+		gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(vertexIndices), gl.STATIC_DRAW);
+		vertexIndexBuffer.itemSize = 1;
+		vertexIndexBuffer.numItems = vertexIndices.length;
+		return vertexIndexBuffer;
+	};
+	
 	function initGL() {
 		try {
 			gl = canvas.getContext("experimental-webgl");

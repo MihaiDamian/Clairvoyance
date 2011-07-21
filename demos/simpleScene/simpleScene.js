@@ -20,403 +20,1044 @@
     ], 
     "meshes": [
         {
+            "faces": [
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        0, 
+                        1
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        33, 
+                        32
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        1, 
+                        2
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        34, 
+                        33
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        2, 
+                        3
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        35, 
+                        34
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        3, 
+                        4
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        36, 
+                        35
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        4, 
+                        5
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        37, 
+                        36
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        5, 
+                        6
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        38, 
+                        37
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        6, 
+                        7
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        39, 
+                        38
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        7, 
+                        8
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        40, 
+                        39
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        8, 
+                        9
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        41, 
+                        40
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        9, 
+                        10
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        42, 
+                        41
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        10, 
+                        11
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        43, 
+                        42
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        11, 
+                        12
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        44, 
+                        43
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        12, 
+                        13
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        45, 
+                        44
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        13, 
+                        14
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        46, 
+                        45
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        14, 
+                        15
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        47, 
+                        46
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        15, 
+                        16
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        48, 
+                        47
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        16, 
+                        17
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        49, 
+                        48
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        17, 
+                        18
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        50, 
+                        49
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        18, 
+                        19
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        51, 
+                        50
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        19, 
+                        20
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        52, 
+                        51
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        20, 
+                        21
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        53, 
+                        52
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        21, 
+                        22
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        54, 
+                        53
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        22, 
+                        23
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        55, 
+                        54
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        23, 
+                        24
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        56, 
+                        55
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        24, 
+                        25
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        57, 
+                        56
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        25, 
+                        26
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        58, 
+                        57
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        26, 
+                        27
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        59, 
+                        58
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        27, 
+                        28
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        60, 
+                        59
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        28, 
+                        29
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        61, 
+                        60
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        29, 
+                        30
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        62, 
+                        61
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        64, 
+                        30, 
+                        31
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        63, 
+                        62
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        31, 
+                        0, 
+                        64
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        65, 
+                        32, 
+                        63
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        32, 
+                        0, 
+                        31
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        32, 
+                        31, 
+                        63
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        30, 
+                        62, 
+                        63
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        30, 
+                        63, 
+                        31
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        29, 
+                        61, 
+                        62
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        29, 
+                        62, 
+                        30
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        28, 
+                        60, 
+                        61
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        28, 
+                        61, 
+                        29
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        27, 
+                        59, 
+                        60
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        27, 
+                        60, 
+                        28
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        26, 
+                        58, 
+                        59
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        26, 
+                        59, 
+                        27
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        25, 
+                        57, 
+                        58
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        25, 
+                        58, 
+                        26
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        24, 
+                        56, 
+                        57
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        24, 
+                        57, 
+                        25
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        23, 
+                        55, 
+                        56
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        23, 
+                        56, 
+                        24
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        22, 
+                        54, 
+                        55
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        22, 
+                        55, 
+                        23
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        21, 
+                        53, 
+                        54
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        21, 
+                        54, 
+                        22
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        20, 
+                        52, 
+                        53
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        20, 
+                        53, 
+                        21
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        19, 
+                        51, 
+                        52
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        19, 
+                        52, 
+                        20
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        18, 
+                        50, 
+                        51
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        18, 
+                        51, 
+                        19
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        17, 
+                        49, 
+                        50
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        17, 
+                        50, 
+                        18
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        16, 
+                        48, 
+                        49
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        16, 
+                        49, 
+                        17
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        15, 
+                        47, 
+                        48
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        15, 
+                        48, 
+                        16
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        14, 
+                        46, 
+                        47
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        14, 
+                        47, 
+                        15
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        13, 
+                        45, 
+                        46
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        13, 
+                        46, 
+                        14
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        12, 
+                        44, 
+                        45
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        12, 
+                        45, 
+                        13
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        11, 
+                        43, 
+                        12
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        43, 
+                        44, 
+                        12
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        10, 
+                        42, 
+                        11
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        42, 
+                        43, 
+                        11
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        9, 
+                        41, 
+                        10
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        41, 
+                        42, 
+                        10
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        8, 
+                        40, 
+                        9
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        40, 
+                        41, 
+                        9
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        7, 
+                        39, 
+                        8
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        39, 
+                        40, 
+                        8
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        6, 
+                        38, 
+                        7
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        38, 
+                        39, 
+                        7
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        5, 
+                        37, 
+                        6
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        37, 
+                        38, 
+                        6
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        4, 
+                        36, 
+                        5
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        36, 
+                        37, 
+                        5
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        3, 
+                        35, 
+                        4
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        35, 
+                        36, 
+                        4
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        2, 
+                        34, 
+                        3
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        34, 
+                        35, 
+                        3
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        1, 
+                        33, 
+                        2
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        33, 
+                        34, 
+                        2
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        0, 
+                        32, 
+                        1
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        32, 
+                        33, 
+                        1
+                    ]
+                }
+            ], 
             "location": [
                 1.6932034492492676, 
                 -4.901791572570801, 
                 -0.9064944982528687
             ], 
+            "materials": [], 
             "name": "Cylinder", 
             "rotation": [
                 0.0, 
                 0.0, 
                 0.0, 
                 1.0
-            ], 
-            "vertex_indices": [
-                64, 
-                0, 
-                1, 
-                65, 
-                33, 
-                32, 
-                64, 
-                1, 
-                2, 
-                65, 
-                34, 
-                33, 
-                64, 
-                2, 
-                3, 
-                65, 
-                35, 
-                34, 
-                64, 
-                3, 
-                4, 
-                65, 
-                36, 
-                35, 
-                64, 
-                4, 
-                5, 
-                65, 
-                37, 
-                36, 
-                64, 
-                5, 
-                6, 
-                65, 
-                38, 
-                37, 
-                64, 
-                6, 
-                7, 
-                65, 
-                39, 
-                38, 
-                64, 
-                7, 
-                8, 
-                65, 
-                40, 
-                39, 
-                64, 
-                8, 
-                9, 
-                65, 
-                41, 
-                40, 
-                64, 
-                9, 
-                10, 
-                65, 
-                42, 
-                41, 
-                64, 
-                10, 
-                11, 
-                65, 
-                43, 
-                42, 
-                64, 
-                11, 
-                12, 
-                65, 
-                44, 
-                43, 
-                64, 
-                12, 
-                13, 
-                65, 
-                45, 
-                44, 
-                64, 
-                13, 
-                14, 
-                65, 
-                46, 
-                45, 
-                64, 
-                14, 
-                15, 
-                65, 
-                47, 
-                46, 
-                64, 
-                15, 
-                16, 
-                65, 
-                48, 
-                47, 
-                64, 
-                16, 
-                17, 
-                65, 
-                49, 
-                48, 
-                64, 
-                17, 
-                18, 
-                65, 
-                50, 
-                49, 
-                64, 
-                18, 
-                19, 
-                65, 
-                51, 
-                50, 
-                64, 
-                19, 
-                20, 
-                65, 
-                52, 
-                51, 
-                64, 
-                20, 
-                21, 
-                65, 
-                53, 
-                52, 
-                64, 
-                21, 
-                22, 
-                65, 
-                54, 
-                53, 
-                64, 
-                22, 
-                23, 
-                65, 
-                55, 
-                54, 
-                64, 
-                23, 
-                24, 
-                65, 
-                56, 
-                55, 
-                64, 
-                24, 
-                25, 
-                65, 
-                57, 
-                56, 
-                64, 
-                25, 
-                26, 
-                65, 
-                58, 
-                57, 
-                64, 
-                26, 
-                27, 
-                65, 
-                59, 
-                58, 
-                64, 
-                27, 
-                28, 
-                65, 
-                60, 
-                59, 
-                64, 
-                28, 
-                29, 
-                65, 
-                61, 
-                60, 
-                64, 
-                29, 
-                30, 
-                65, 
-                62, 
-                61, 
-                64, 
-                30, 
-                31, 
-                65, 
-                63, 
-                62, 
-                31, 
-                0, 
-                64, 
-                65, 
-                32, 
-                63, 
-                32, 
-                0, 
-                31, 
-                32, 
-                31, 
-                63, 
-                30, 
-                62, 
-                63, 
-                30, 
-                63, 
-                31, 
-                29, 
-                61, 
-                62, 
-                29, 
-                62, 
-                30, 
-                28, 
-                60, 
-                61, 
-                28, 
-                61, 
-                29, 
-                27, 
-                59, 
-                60, 
-                27, 
-                60, 
-                28, 
-                26, 
-                58, 
-                59, 
-                26, 
-                59, 
-                27, 
-                25, 
-                57, 
-                58, 
-                25, 
-                58, 
-                26, 
-                24, 
-                56, 
-                57, 
-                24, 
-                57, 
-                25, 
-                23, 
-                55, 
-                56, 
-                23, 
-                56, 
-                24, 
-                22, 
-                54, 
-                55, 
-                22, 
-                55, 
-                23, 
-                21, 
-                53, 
-                54, 
-                21, 
-                54, 
-                22, 
-                20, 
-                52, 
-                53, 
-                20, 
-                53, 
-                21, 
-                19, 
-                51, 
-                52, 
-                19, 
-                52, 
-                20, 
-                18, 
-                50, 
-                51, 
-                18, 
-                51, 
-                19, 
-                17, 
-                49, 
-                50, 
-                17, 
-                50, 
-                18, 
-                16, 
-                48, 
-                49, 
-                16, 
-                49, 
-                17, 
-                15, 
-                47, 
-                48, 
-                15, 
-                48, 
-                16, 
-                14, 
-                46, 
-                47, 
-                14, 
-                47, 
-                15, 
-                13, 
-                45, 
-                46, 
-                13, 
-                46, 
-                14, 
-                12, 
-                44, 
-                45, 
-                12, 
-                45, 
-                13, 
-                11, 
-                43, 
-                12, 
-                43, 
-                44, 
-                12, 
-                10, 
-                42, 
-                11, 
-                42, 
-                43, 
-                11, 
-                9, 
-                41, 
-                10, 
-                41, 
-                42, 
-                10, 
-                8, 
-                40, 
-                9, 
-                40, 
-                41, 
-                9, 
-                7, 
-                39, 
-                8, 
-                39, 
-                40, 
-                8, 
-                6, 
-                38, 
-                7, 
-                38, 
-                39, 
-                7, 
-                5, 
-                37, 
-                6, 
-                37, 
-                38, 
-                6, 
-                4, 
-                36, 
-                5, 
-                36, 
-                37, 
-                5, 
-                3, 
-                35, 
-                4, 
-                35, 
-                36, 
-                4, 
-                2, 
-                34, 
-                3, 
-                34, 
-                35, 
-                3, 
-                1, 
-                33, 
-                2, 
-                33, 
-                34, 
-                2, 
-                0, 
-                32, 
-                1, 
-                32, 
-                33, 
-                1
             ], 
             "vertices": [
                 0.0, 
@@ -620,10 +1261,114 @@
             ]
         }, 
         {
+            "faces": [
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        4, 
+                        0, 
+                        3
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        4, 
+                        3, 
+                        7
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        2, 
+                        6, 
+                        7
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        2, 
+                        7, 
+                        3
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        1, 
+                        5, 
+                        2
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        5, 
+                        6, 
+                        2
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        0, 
+                        4, 
+                        1
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        4, 
+                        5, 
+                        1
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        4, 
+                        7, 
+                        5
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        7, 
+                        6, 
+                        5
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        0, 
+                        1, 
+                        2
+                    ]
+                }, 
+                {
+                    "material_index": 0, 
+                    "vertex_indices": [
+                        0, 
+                        2, 
+                        3
+                    ]
+                }
+            ], 
             "location": [
                 0.0, 
                 0.0, 
                 0.0
+            ], 
+            "materials": [
+                {
+                    "index": 0, 
+                    "texture": {}
+                }
             ], 
             "name": "Cube", 
             "rotation": [
@@ -631,44 +1376,6 @@
                 0.4619399309158325, 
                 0.19134169816970825, 
                 0.8446230888366699
-            ], 
-            "vertex_indices": [
-                4, 
-                0, 
-                3, 
-                4, 
-                3, 
-                7, 
-                2, 
-                6, 
-                7, 
-                2, 
-                7, 
-                3, 
-                1, 
-                5, 
-                2, 
-                5, 
-                6, 
-                2, 
-                0, 
-                4, 
-                1, 
-                4, 
-                5, 
-                1, 
-                4, 
-                7, 
-                5, 
-                7, 
-                6, 
-                5, 
-                0, 
-                1, 
-                2, 
-                0, 
-                2, 
-                3
             ], 
             "vertices": [
                 1.0, 
