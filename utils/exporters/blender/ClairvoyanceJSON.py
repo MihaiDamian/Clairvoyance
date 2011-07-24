@@ -59,9 +59,8 @@ class ClairvoyanceJSON:
         mesh = {}
 
         materials = []
-        for material_index, material_data in enumerate(mesh_data.materials):
+        for material_data in mesh_data.materials:
             material = self.material(material_data)
-            material['index'] = material_index
             materials.append(material)
         mesh['materials'] = materials
 

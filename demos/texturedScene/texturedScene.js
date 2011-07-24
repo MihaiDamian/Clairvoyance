@@ -66621,161 +66621,133 @@
             ], 
             "materials": [
                 {
-                    "index": 0, 
                     "texture": {
                         "path": "//images\\texture0.jpg"
                     }
                 }, 
                 {
-                    "index": 1, 
                     "texture": {}
                 }, 
                 {
-                    "index": 2, 
                     "texture": {
                         "path": "//images\\texture1.jpg"
                     }
                 }, 
                 {
-                    "index": 3, 
                     "texture": {
                         "path": "//images\\texture2.jpg"
                     }
                 }, 
                 {
-                    "index": 4, 
                     "texture": {}
                 }, 
                 {
-                    "index": 5, 
                     "texture": {
                         "path": "//images\\texture14.jpg"
                     }
                 }, 
                 {
-                    "index": 6, 
                     "texture": {
                         "path": "//images\\texture11.jpg"
                     }
                 }, 
                 {
-                    "index": 7, 
                     "texture": {
                         "path": "//images\\texture15.jpg"
                     }
                 }, 
                 {
-                    "index": 8, 
                     "texture": {}
                 }, 
                 {
-                    "index": 9, 
                     "texture": {
                         "path": "//images\\texture5.jpg"
                     }
                 }, 
                 {
-                    "index": 10, 
                     "texture": {
                         "path": "//images\\texture4.jpg"
                     }
                 }, 
                 {
-                    "index": 11, 
                     "texture": {
                         "path": "//images\\texture12.jpg"
                     }
                 }, 
                 {
-                    "index": 12, 
                     "texture": {
                         "path": "//images\\texture6.jpg"
                     }
                 }, 
                 {
-                    "index": 13, 
                     "texture": {
                         "path": "//images\\texture17.jpg"
                     }
                 }, 
                 {
-                    "index": 14, 
                     "texture": {}
                 }, 
                 {
-                    "index": 15, 
                     "texture": {
                         "path": "//images\\texture7.jpg"
                     }
                 }, 
                 {
-                    "index": 16, 
                     "texture": {
                         "path": "//images\\texture21.jpg"
                     }
                 }, 
                 {
-                    "index": 17, 
                     "texture": {
                         "path": "//images\\texture22.jpg"
                     }
                 }, 
                 {
-                    "index": 18, 
                     "texture": {
                         "path": "//images\\texture20.jpg"
                     }
                 }, 
                 {
-                    "index": 19, 
                     "texture": {
                         "path": "//images\\texture13.jpg"
                     }
                 }, 
                 {
-                    "index": 20, 
                     "texture": {
                         "path": "//images\\texture23.jpg"
                     }
                 }, 
                 {
-                    "index": 21, 
                     "texture": {
                         "path": "//images\\texture16.jpg"
                     }
                 }, 
                 {
-                    "index": 22, 
                     "texture": {
                         "path": "//images\\texture19.jpg"
                     }
                 }, 
                 {
-                    "index": 23, 
                     "texture": {
                         "path": "//images\\texture3.jpg"
                     }
                 }, 
                 {
-                    "index": 24, 
                     "texture": {
                         "path": "//images\\texture10.jpg"
                     }
                 }, 
                 {
-                    "index": 25, 
                     "texture": {
                         "path": "//images\\texture18.jpg"
                     }
                 }, 
                 {
-                    "index": 26, 
                     "texture": {
                         "path": "//images\\texture9.jpg"
                     }
                 }, 
                 {
-                    "index": 27, 
                     "texture": {
                         "path": "//images\\texture8.jpg"
                     }

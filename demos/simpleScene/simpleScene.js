@@ -1366,7 +1366,6 @@
             ], 
             "materials": [
                 {
-                    "index": 0, 
                     "texture": {}
                 }
             ], 

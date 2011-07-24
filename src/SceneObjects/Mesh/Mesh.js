@@ -44,6 +44,7 @@ CLAIRVOYANCE.Mesh = function Mesh(data) {
 				// create a new batch
 				if(data.materials.length > material_index) {
 					material = data.materials[material_index];
+					material.index = material_index;
 					meshFaceBatch = new CLAIRVOYANCE.MeshFaceBatch(renderer, material);
 					meshFaceBatch.addFace(face);
 					meshFaceBatches.push(meshFaceBatch);
