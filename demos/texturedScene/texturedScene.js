@@ -1,37 +1,20 @@
 {
     "cameras": [
         {
-            "clipEnd": 1000.0, 
-            "clipStart": 1.0, 
-            "fov": 0.6981316804885864, 
-            "location": [
-                3.2015297858613377e-39, 
-                0.0, 
-                0.0
-            ], 
-            "name": "Camera.001", 
-            "rotation": [
-                0.7071067690849304, 
-                -1.1017288786214577e-40, 
-                1.1017288786214577e-40, 
-                0.7071067690849304
-            ]
-        }, 
-        {
-            "clipEnd": 100.0, 
+            "clipEnd": 97257.6015625, 
             "clipStart": 0.10000000149011612, 
             "fov": 0.8575560450553894, 
             "location": [
-                7.481131553649902, 
+                -5132.5791015625, 
                 -6.5076398849487305, 
-                5.34366512298584
+                10231.5048828125
             ], 
             "name": "Camera", 
             "rotation": [
-                0.48170700669288635, 
-                0.21292176842689514, 
-                0.3342514932155609, 
-                0.7816000580787659
+                0.27059805393218994, 
+                -0.27059823274612427, 
+                -0.6532816290855408, 
+                0.6532812118530273
             ]
         }
     ], 
@@ -66638,133 +66621,161 @@
             ], 
             "materials": [
                 {
+                    "index": 0, 
                     "texture": {
                         "path": "//images\\texture0.jpg"
                     }
                 }, 
                 {
+                    "index": 1, 
                     "texture": {}
                 }, 
                 {
+                    "index": 2, 
                     "texture": {
                         "path": "//images\\texture1.jpg"
                     }
                 }, 
                 {
+                    "index": 3, 
                     "texture": {
                         "path": "//images\\texture2.jpg"
                     }
                 }, 
                 {
+                    "index": 4, 
                     "texture": {}
                 }, 
                 {
+                    "index": 5, 
                     "texture": {
                         "path": "//images\\texture14.jpg"
                     }
                 }, 
                 {
+                    "index": 6, 
                     "texture": {
                         "path": "//images\\texture11.jpg"
                     }
                 }, 
                 {
+                    "index": 7, 
                     "texture": {
                         "path": "//images\\texture15.jpg"
                     }
                 }, 
                 {
+                    "index": 8, 
                     "texture": {}
                 }, 
                 {
+                    "index": 9, 
                     "texture": {
                         "path": "//images\\texture5.jpg"
                     }
                 }, 
                 {
+                    "index": 10, 
                     "texture": {
                         "path": "//images\\texture4.jpg"
                     }
                 }, 
                 {
+                    "index": 11, 
                     "texture": {
                         "path": "//images\\texture12.jpg"
                     }
                 }, 
                 {
+                    "index": 12, 
                     "texture": {
                         "path": "//images\\texture6.jpg"
                     }
                 }, 
                 {
+                    "index": 13, 
                     "texture": {
                         "path": "//images\\texture17.jpg"
                     }
                 }, 
                 {
+                    "index": 14, 
                     "texture": {}
                 }, 
                 {
+                    "index": 15, 
                     "texture": {
                         "path": "//images\\texture7.jpg"
                     }
                 }, 
                 {
+                    "index": 16, 
                     "texture": {
                         "path": "//images\\texture21.jpg"
                     }
                 }, 
                 {
+                    "index": 17, 
                     "texture": {
                         "path": "//images\\texture22.jpg"
                     }
                 }, 
                 {
+                    "index": 18, 
                     "texture": {
                         "path": "//images\\texture20.jpg"
                     }
                 }, 
                 {
+                    "index": 19, 
                     "texture": {
                         "path": "//images\\texture13.jpg"
                     }
                 }, 
                 {
+                    "index": 20, 
                     "texture": {
                         "path": "//images\\texture23.jpg"
                     }
                 }, 
                 {
+                    "index": 21, 
                     "texture": {
                         "path": "//images\\texture16.jpg"
                     }
                 }, 
                 {
+                    "index": 22, 
                     "texture": {
                         "path": "//images\\texture19.jpg"
                     }
                 }, 
                 {
+                    "index": 23, 
                     "texture": {
                         "path": "//images\\texture3.jpg"
                     }
                 }, 
                 {
+                    "index": 24, 
                     "texture": {
                         "path": "//images\\texture10.jpg"
                     }
                 }, 
                 {
+                    "index": 25, 
                     "texture": {
                         "path": "//images\\texture18.jpg"
                     }
                 }, 
                 {
+                    "index": 26, 
                     "texture": {
                         "path": "//images\\texture9.jpg"
                     }
                 }, 
                 {
+                    "index": 27, 
                     "texture": {
                         "path": "//images\\texture8.jpg"
                     }
@@ -73006,107 +73017,6 @@
                 998.4834594726562, 
                 7867.52880859375, 
                 5976.0
-            ]
-        }, 
-        {
-            "faces": [
-                {
-                    "material_index": 0, 
-                    "vertex_indices": [
-                        0, 
-                        1, 
-                        2, 
-                        3
-                    ]
-                }, 
-                {
-                    "material_index": 0, 
-                    "vertex_indices": [
-                        4, 
-                        7, 
-                        6, 
-                        5
-                    ]
-                }, 
-                {
-                    "material_index": 0, 
-                    "vertex_indices": [
-                        0, 
-                        4, 
-                        5, 
-                        1
-                    ]
-                }, 
-                {
-                    "material_index": 0, 
-                    "vertex_indices": [
-                        1, 
-                        5, 
-                        6, 
-                        2
-                    ]
-                }, 
-                {
-                    "material_index": 0, 
-                    "vertex_indices": [
-                        2, 
-                        6, 
-                        7, 
-                        3
-                    ]
-                }, 
-                {
-                    "material_index": 0, 
-                    "vertex_indices": [
-                        4, 
-                        0, 
-                        3, 
-                        7
-                    ]
-                }
-            ], 
-            "location": [
-                0.0, 
-                0.0, 
-                0.0
-            ], 
-            "materials": [
-                {
-                    "texture": {}
-                }
-            ], 
-            "name": "Cube", 
-            "rotation": [
-                0.0, 
-                0.0, 
-                0.0, 
-                1.0
-            ], 
-            "vertices": [
-                1.0, 
-                0.9999999403953552, 
-                -1.0, 
-                1.0, 
-                -1.0, 
-                -1.0, 
-                -1.0000001192092896, 
-                -0.9999998211860657, 
-                -1.0, 
-                -0.9999996423721313, 
-                1.0000003576278687, 
-                -1.0, 
-                1.0000004768371582, 
-                0.999999463558197, 
-                1.0, 
-                0.9999993443489075, 
-                -1.0000005960464478, 
-                1.0, 
-                -1.0000003576278687, 
-                -0.9999996423721313, 
-                1.0, 
-                -0.9999999403953552, 
-                1.0, 
-                1.0
             ]
         }
     ]
