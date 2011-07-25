@@ -11,7 +11,7 @@ CLAIRVOYANCE.Engine = function Engine(canvasID, sceneFilePath) {
 		
 	this.controller = function() {
 		return controller;
-	}
+	};
 
 	(function() {
 		var canvas = document.getElementById(canvasID),

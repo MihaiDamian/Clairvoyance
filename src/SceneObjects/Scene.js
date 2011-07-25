@@ -58,7 +58,7 @@ CLAIRVOYANCE.Scene = function Scene(renderer, controller) {
 		renderLoop = new CLAIRVOYANCE.RenderLoop(onRenderFrame);
 	}
 
-	this.load = function(filePath){
+	this.load = function(filePath) {
 		var request = new XMLHttpRequest();
 		request.open("GET", filePath);
 		request.onreadystatechange = function() {
