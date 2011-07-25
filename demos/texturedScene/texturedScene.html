@@ -5,8 +5,21 @@
 		<script src="../../libs/glMatrix.js"></script>
 		<script src="../../libs/webgl-utils.js"></script>
 		<script src="../../build/clairvoyance.js"></script>
+		<script>
+		<!--
+			function setupScene() {
+				var engine;
+				try {
+					engine = new CLAIRVOYANCE.Engine('canvas', 'texturedScene.js');
+				}
+				catch (exception) {
+					alert(exception);
+				}
+			}
+		-->
+		</script>
 	</head>
-	<body onload="CLAIRVOYANCE('canvas', 'texturedScene.js');">
-    <canvas id="canvas" style="border: none;" width="1800" height="1000"></canvas>
+	<body onload="setupScene()">
+		<canvas id="canvas" style="border: none;" width="1800" height="1000"></canvas>
 	</body>
 </html>
