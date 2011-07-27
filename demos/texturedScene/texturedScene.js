@@ -66622,7 +66622,7 @@
             "materials": [
                 {
                     "texture": {
-                        "path": "//images\\texture0.jpg"
+                        "path": "images\\texture0.jpg"
                     }
                 }, 
                 {
@@ -66630,30 +66630,12 @@
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture1.jpg"
+                        "path": "images\\texture1.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture2.jpg"
-                    }
-                }, 
-                {
-                    "texture": {}
-                }, 
-                {
-                    "texture": {
-                        "path": "//images\\texture14.jpg"
-                    }
-                }, 
-                {
-                    "texture": {
-                        "path": "//images\\texture11.jpg"
-                    }
-                }, 
-                {
-                    "texture": {
-                        "path": "//images\\texture15.jpg"
+                        "path": "images\\texture2.jpg"
                     }
                 }, 
                 {
@@ -66661,27 +66643,17 @@
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture5.jpg"
+                        "path": "images\\texture14.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture4.jpg"
+                        "path": "images\\texture11.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture12.jpg"
-                    }
-                }, 
-                {
-                    "texture": {
-                        "path": "//images\\texture6.jpg"
-                    }
-                }, 
-                {
-                    "texture": {
-                        "path": "//images\\texture17.jpg"
+                        "path": "images\\texture15.jpg"
                     }
                 }, 
                 {
@@ -66689,67 +66661,95 @@
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture7.jpg"
+                        "path": "images\\texture5.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture21.jpg"
+                        "path": "images\\texture4.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture22.jpg"
+                        "path": "images\\texture12.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture20.jpg"
+                        "path": "images\\texture6.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture13.jpg"
+                        "path": "images\\texture17.jpg"
+                    }
+                }, 
+                {
+                    "texture": {}
+                }, 
+                {
+                    "texture": {
+                        "path": "images\\texture7.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture23.jpg"
+                        "path": "images\\texture21.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture16.jpg"
+                        "path": "images\\texture22.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture19.jpg"
+                        "path": "images\\texture20.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture3.jpg"
+                        "path": "images\\texture13.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture10.jpg"
+                        "path": "images\\texture23.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture18.jpg"
+                        "path": "images\\texture16.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture9.jpg"
+                        "path": "images\\texture19.jpg"
                     }
                 }, 
                 {
                     "texture": {
-                        "path": "//images\\texture8.jpg"
+                        "path": "images\\texture3.jpg"
+                    }
+                }, 
+                {
+                    "texture": {
+                        "path": "images\\texture10.jpg"
+                    }
+                }, 
+                {
+                    "texture": {
+                        "path": "images\\texture18.jpg"
+                    }
+                }, 
+                {
+                    "texture": {
+                        "path": "images\\texture9.jpg"
+                    }
+                }, 
+                {
+                    "texture": {
+                        "path": "images\\texture8.jpg"
                     }
                 }
             ], 

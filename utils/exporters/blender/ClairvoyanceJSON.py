@@ -30,6 +30,10 @@ class ClairvoyanceJSON:
     def __init__(self, prettyprint):
         self.prettyprint = prettyprint
 
+    def rel_path_from_blender_path(self, path):
+        #blender prefixes relative paths with '//'
+        return path.strip('/')
+
     def obj(self, obj_data):
         obj = {}
         obj['name'] = obj_data.name
@@ -51,7 +55,9 @@ class ClairvoyanceJSON:
         texture_data = material_data.active_texture
         if texture_data is not None:
             if texture_data.type == 'IMAGE':
-                texture['path'] = texture_data.image.filepath
+                texture_path = texture_data.image.filepath
+                normalized_path = self.rel_path_from_blender_path(texture_path)
+                texture['path'] = normalized_path
         material['texture'] = texture
         return material
 
