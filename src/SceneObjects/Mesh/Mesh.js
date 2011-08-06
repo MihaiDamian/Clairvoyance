@@ -5,29 +5,49 @@
 CLAIRVOYANCE.Mesh = function Mesh(data) {
 	var self = this,
 		node = new CLAIRVOYANCE.Node(data),
-		vertexPositionBuffer,
-		meshFaceBatches = [],
-		vertexIndexBuffer = null;
+		meshFaceBatches = [];
 	
 	CLAIRVOYANCE.ObjectUtils.exposeProperties(self, node);
 	
-	function setupVertexData() {
-		var gl = self.renderer().gl();
-		if(data.hasOwnProperty('vertices')) {
-			vertexPositionBuffer = gl.createBuffer();
-			var vertexPositions = data.vertices;
-			gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
-			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexPositions), gl.STATIC_DRAW);
-			vertexPositionBuffer.itemSize = 3;
-			vertexPositionBuffer.numItems = vertexPositions.length / 3;
+	this.onEnter = function() {
+		node.onEnter();
+		
+		batchFaces();
+	};
+	
+	this.draw = function() {
+		node.draw();
+		
+		// TODO: I think this needs to be moved to Node
+		setMatrixUniforms();
+			
+		drawFaceBatches();
+	};
+	
+	function vertexCoordsForVertexIndex(index) {
+		var vertices = data.vertices,
+			offset = index * 3;
+		return [vertices[offset], vertices[offset + 1], vertices[offset + 2]];
+	}
+	
+	function batchFace(meshFaceBatch, face) {
+		var i, vertex, vertexIndex, coords, textureCoordsOffset, vertexTextureCoords,
+			vertices = [],
+			faceTextureCoords = face.uv_coords;
+		for(i = 0;i < face.vertex_indices.length;i++) {
+			vertexIndex = face.vertex_indices[i];
+			coords = vertexCoordsForVertexIndex(vertexIndex);
+			textureCoordsOffset = i * 2;
+			vertexTextureCoords = [faceTextureCoords[textureCoordsOffset], faceTextureCoords[textureCoordsOffset + 1]];
+			vertex = new CLAIRVOYANCE.MeshVertex(vertexIndex, coords, vertexTextureCoords);
+			vertices.push(vertex);
 		}
+		meshFaceBatch.addFace(vertices);
 	}
 	
 	function batchFaces() {
-		var i, face, j, meshFaceBatch, batchFound, material, material_index, 
-			vertexIndices = [],
-			renderer = self.renderer(),
-			gl = renderer.gl();
+		var i, face, j, meshFaceBatch, batchFound, material, material_index,
+			renderer = self.renderer();
 		for(i = 0;i < data.faces.length;i++) {
 			face = data.faces[i];
 			material_index = face.material_index;
@@ -35,7 +55,7 @@ CLAIRVOYANCE.Mesh = function Mesh(data) {
 			for(j = 0;j < meshFaceBatches.length;j++) {
 				meshFaceBatch = meshFaceBatches[j];
 				if(meshFaceBatch.materialIndex() === material_index) {
-					meshFaceBatch.addFace(face);
+					batchFace(meshFaceBatch, face);
 					batchFound = true;
 					break;
 				}
@@ -46,24 +66,13 @@ CLAIRVOYANCE.Mesh = function Mesh(data) {
 					material = data.materials[material_index];
 					material.index = material_index;
 					meshFaceBatch = new CLAIRVOYANCE.MeshFaceBatch(renderer, material);
-					meshFaceBatch.addFace(face);
+					batchFace(meshFaceBatch, face);
 					meshFaceBatches.push(meshFaceBatch);
 				}
-				// this face has no material so we're not batching it
-				else {
-					vertexIndices = vertexIndices.concat(face.vertex_indices);
-					vertexIndexBuffer = renderer.createVertexIndexBuffer(vertexIndices);
-				}
+				// TODO: do something with faces that have no material
 			}
 		}
 	}
-	
-	this.onEnter = function() {
-		node.onEnter();
-		
-		setupVertexData();
-		batchFaces();
-	};
 	
 	function setMatrixUniforms() {
 		var renderer = self.renderer(),
@@ -78,23 +87,4 @@ CLAIRVOYANCE.Mesh = function Mesh(data) {
 			meshFaceBatches[i].draw();
 		}
 	}
-	
-	this.draw = function() {
-		var gl = self.renderer().gl();
-		node.draw();
-		
-		if(typeof vertexPositionBuffer !== 'undefined') {
-			gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
-			gl.vertexAttribPointer(self.renderer().shaderProgram().vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-			
-			setMatrixUniforms();
-			
-			if(vertexIndexBuffer !== null) {
-				gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, vertexIndexBuffer);
-				gl.drawElements(gl.TRIANGLES, vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
-			}
-			
-			drawFaceBatches();
-		}
-	};
 };

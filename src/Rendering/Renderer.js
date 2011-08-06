@@ -7,19 +7,27 @@ CLAIRVOYANCE.Renderer = function Renderer(canvas) {
 	var gl,
 		shaderProgram,
 		vertexShaderSource = ["attribute vec3 aVertexPosition;",
+							"attribute vec2 aTextureCoord;",
 						
 						    "uniform mat4 uMVMatrix;",
 						    "uniform mat4 uPMatrix;",
+							
+							"varying vec2 vTextureCoord;",
 						
 						    "void main(void) {",
 						        "gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);",
+								"vTextureCoord = aTextureCoord;",
 						    "}"].join('\n'),
 		fragmentShaderSource = ["#ifdef GL_ES",
 								"precision highp float;",
 								"#endif",
+								
+								"varying vec2 vTextureCoord;",
+								
+								"uniform sampler2D uSampler;",
 							
 								"void main(void) {",
-									"gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);",
+									"gl_FragColor = texture2D(uSampler, vec2(vTextureCoord.s, vTextureCoord.t));",
 								"}"].join('\n');
 	
 	this.gl = function() {
@@ -43,6 +51,7 @@ CLAIRVOYANCE.Renderer = function Renderer(canvas) {
 		return shader;
 	}
 	
+	// TODO: move this on Mesh
 	this.createVertexIndexBuffer = function(vertexIndices) {
 		var vertexIndexBuffer = gl.createBuffer();
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, vertexIndexBuffer);
@@ -84,9 +93,13 @@ CLAIRVOYANCE.Renderer = function Renderer(canvas) {
 
 		shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
 		gl.enableVertexAttribArray(shaderProgram.vertexPositionAttribute);
+		
+		shaderProgram.textureCoordAttribute = gl.getAttribLocation(shaderProgram, "aTextureCoord");
+        gl.enableVertexAttribArray(shaderProgram.textureCoordAttribute);
 
 		shaderProgram.pMatrixUniform = gl.getUniformLocation(shaderProgram, "uPMatrix");
 		shaderProgram.mvMatrixUniform = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+		shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
 	}
 
 	initGL();
