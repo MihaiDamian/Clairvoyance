@@ -1051,7 +1051,11 @@
                 -4.901791572570801, 
                 -0.9064944982528687
             ], 
-            "materials": [], 
+            "materials": [
+                {
+                    "name": "Material.001"
+                }
+            ], 
             "name": "Cylinder", 
             "rotation": [
                 0.0, 
@@ -1366,7 +1370,7 @@
             ], 
             "materials": [
                 {
-                    "texture": {}
+                    "name": "Material"
                 }
             ], 
             "name": "Cube", 

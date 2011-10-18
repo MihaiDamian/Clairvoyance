@@ -71,27 +71,35 @@ CLAIRVOYANCE.MeshFaceBatch = function MeshFaceBatch(renderer, material) {
 	
 	this.draw = function() {
 		var gl = renderer.gl(),
-			shader = renderer.shaderProgram();
+			initialShaderType = renderer.shaderType(),
+			shader;
+			
+		if(isTextured() === false) {
+			renderer.setShaderType(CLAIRVOYANCE.Shader.type.Basic);
+		}
 		
-		// TODO: make this work when there is no texture
+		shader = renderer.shaderProgram();
+		
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
+		gl.vertexAttribPointer(shader.vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
+		
 		if(vertexTextureCoordinates.length > 0) {
-			gl.bindBuffer(gl.ARRAY_BUFFER, vertexPositionBuffer);
-			gl.vertexAttribPointer(shader.vertexPositionAttribute, vertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
-		
 			gl.bindBuffer(gl.ARRAY_BUFFER, vertexTextureCoordBuffer);
 			gl.vertexAttribPointer(shader.textureCoordAttribute, vertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
 			
 			gl.activeTexture(gl.TEXTURE0);
 			gl.bindTexture(gl.TEXTURE_2D, texture);
 			gl.uniform1i(shader.samplerUniform, 0);
-			
-			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, vertexIndexBuffer);
-			gl.drawElements(gl.TRIANGLES, vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 		}
+			
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, vertexIndexBuffer);
+		gl.drawElements(gl.TRIANGLES, vertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
+		
+		renderer.setShaderType(initialShaderType);
 	};
 	
 	function isPowerOfTwo(x) {
-		return (x & (x - 1)) == 0;
+		return (x & (x - 1)) === 0;
 	}
 	 
 	function nextHighestPowerOfTwo(x) {
@@ -102,6 +110,7 @@ CLAIRVOYANCE.MeshFaceBatch = function MeshFaceBatch(renderer, material) {
 		return x + 1;
 	}
 	
+	// TODO: this needs to be moved to a new Texture object
 	function onTextureImageLoad() {
 		var gl = renderer.gl();
 		gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -122,14 +131,20 @@ CLAIRVOYANCE.MeshFaceBatch = function MeshFaceBatch(renderer, material) {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
 		gl.bindTexture(gl.TEXTURE_2D, null);
 	}
+	
+	function isTextured() {
+		return material.hasOwnProperty('texture');
+	}
 
 	(function() {
-		texture = renderer.gl().createTexture();
-		textureImage = new Image();
-		textureImage.onload = function() {
-			onTextureImageLoad();
-		};
-		textureImage.src = material.texture.path;
+		if(isTextured()) {
+			texture = renderer.gl().createTexture();
+			textureImage = new Image();
+			textureImage.onload = function() {
+				onTextureImageLoad();
+			};
+			textureImage.src = material.texture.path;
+		}
 		
 		materialIndex = material.index;
 	}());

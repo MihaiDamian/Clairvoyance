@@ -31,15 +31,17 @@ CLAIRVOYANCE.Mesh = function Mesh(data) {
 	}
 	
 	function batchFace(meshFaceBatch, face) {
-		var i, vertex, vertexIndex, coords, textureCoordsOffset, vertexTextureCoords,
-			vertices = [],
-			faceTextureCoords = face.uv_coords;
+		var i, vertex, vertexIndex, coords, textureCoordsOffset, faceTextureCoords,
+			vertices = [];
 		for(i = 0;i < face.vertex_indices.length;i++) {
 			vertexIndex = face.vertex_indices[i];
 			coords = vertexCoordsForVertexIndex(vertexIndex);
-			textureCoordsOffset = i * 2;
-			vertexTextureCoords = [faceTextureCoords[textureCoordsOffset], faceTextureCoords[textureCoordsOffset + 1]];
-			vertex = new CLAIRVOYANCE.MeshVertex(vertexIndex, coords, vertexTextureCoords);
+			vertex = new CLAIRVOYANCE.MeshVertex(vertexIndex, coords);
+			if(face.hasOwnProperty('uv_coords')) {
+				faceTextureCoords = face.uv_coords;
+				textureCoordsOffset = i * 2;
+				vertex.uv_coords = [faceTextureCoords[textureCoordsOffset], faceTextureCoords[textureCoordsOffset + 1]];
+			}
 			vertices.push(vertex);
 		}
 		meshFaceBatch.addFace(vertices);
@@ -69,7 +71,6 @@ CLAIRVOYANCE.Mesh = function Mesh(data) {
 					batchFace(meshFaceBatch, face);
 					meshFaceBatches.push(meshFaceBatch);
 				}
-				// TODO: do something with faces that have no material
 			}
 		}
 	}

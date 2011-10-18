@@ -51,14 +51,15 @@ class ClairvoyanceJSON:
 
     def material(self, material_data):
         material = {}
-        texture = {}
         texture_data = material_data.active_texture
-        if texture_data is not None:
+        if texture_data != None and texture_data.type != 'NONE':
+            texture = {}
             if texture_data.type == 'IMAGE':
                 texture_path = texture_data.image.filepath
                 normalized_path = self.rel_path_from_blender_path(texture_path)
                 texture['path'] = normalized_path
-        material['texture'] = texture
+            material['texture'] = texture
+        material['name'] = material_data.name
         return material
 
     def mesh(self, mesh_data):
