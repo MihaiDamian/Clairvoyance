@@ -20,14 +20,6 @@ CLAIRVOYANCE.Camera = function Camera(data, scene) {
 	};
 	
 	(function() {
-		var location, rotation;
-		
-		location = vec3.negate(self.location());
-		self.setLocation(location);
-		
-		rotation = vec3.negate(self.rotation());
-		self.setRotation(rotation);
-		
-		self.useScaleRotateTranslateTransforms();
+		self.setReverseTransforms(true);
 	}());
 };

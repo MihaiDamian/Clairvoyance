@@ -4,7 +4,7 @@
 														renderer: optional, a Renderer object
 														location: optional, a coordinates array,
 														name: optional,
-														rotation: optional, an Euler XYZ rotation array with angles in radians})
+														rotation: optional, XYZW quaternion})
 */
 CLAIRVOYANCE.Node = function Node(args) {
 	var self = this,
@@ -12,9 +12,9 @@ CLAIRVOYANCE.Node = function Node(args) {
 		renderer = args.renderer,
 		mvMatrix = mat4.create(),
 		location = [0, 0, 0],
-		rotation = [0, 0, 0],
+		rotation = [0, 0, 0, 1],
 		children = [],
-		transforms = [];
+		reverseTransforms = false;
 	
 	this.setParent = function(node) {
 		parent = node;
@@ -36,8 +36,23 @@ CLAIRVOYANCE.Node = function Node(args) {
 		rotation = newRotation;
 	};
 	
-	this.rotate = function(rotationVec) {
-		rotation = vec3.add(rotation, rotationVec);
+	this.setReverseTransforms = function(reverse) {
+		reverseTransforms = reverse;
+	};
+	
+	function rotateByQuaternion(rotationQuat) {
+		quat4.multiply(rotation, rotationQuat);
+	}
+	
+	this.rotateByEuler = function(rotationVec) {
+		var rotationQuat = CLAIRVOYANCE.MathUtils.eulerToQuaternion(rotationVec);
+		rotateByQuaternion(rotationQuat);
+	};
+	
+	this.translate = function(translationVec) {
+		var rotatedTranslation = [0, 0, 0];
+		quat4.multiplyVec3(rotation, translationVec, rotatedTranslation);
+		vec3.add(location, rotatedTranslation);
 	};
 
 	this.renderer = function() {
@@ -62,19 +77,35 @@ CLAIRVOYANCE.Node = function Node(args) {
 	}
 	
 	function translateTransform() {
-		mat4.translate(mvMatrix, location);
+		var locationVec = vec3.create(location);
+		
+		if(reverseTransforms) {
+			vec3.negate(location, locationVec);
+		}
+		
+		mat4.translate(mvMatrix, locationVec);
 	}
 	
 	function rotateTransfrom() {
-		mat4.rotateX(mvMatrix, rotation[0]);
-		mat4.rotateY(mvMatrix, rotation[1]);
-		mat4.rotateZ(mvMatrix, rotation[2]);
+		var rotationQuat = quat4.create(rotation), 
+			rotationMatrix;
+			
+		if(reverseTransforms) {
+			quat4.inverse(rotation, rotationQuat);
+		}
+		
+		rotationMatrix = quat4.toMat4(rotationQuat);
+		mat4.multiply(mvMatrix, rotationMatrix);
 	}
 	
 	function applyTransforms() {
-		var i;
-		for(i = 0;i < transforms.length;i++) {
-			transforms[i]();
+		if(reverseTransforms) {
+			rotateTransfrom();
+			translateTransform();
+		}
+		else {
+			translateTransform();
+			rotateTransfrom();
 		}
 	}
 	
@@ -92,14 +123,6 @@ CLAIRVOYANCE.Node = function Node(args) {
 		renderer = args.renderer || parent.renderer();
 	};
 	
-	this.useTranslateRotateScaleTransforms = function() {
-		transforms = [translateTransform, rotateTransfrom];
-	};
-	
-	this.useScaleRotateTranslateTransforms = function() {
-		transforms = [rotateTransfrom, translateTransform];
-	};
-	
 	(function() {
 		if(args.hasOwnProperty('location')) {
 			location = args.location;
@@ -108,7 +131,5 @@ CLAIRVOYANCE.Node = function Node(args) {
 		if(args.hasOwnProperty('rotation')) {
 			rotation = args.rotation;
 		}
-		
-		self.useTranslateRotateScaleTransforms();
 	}());
 };
